@@ -9,4 +9,4 @@ env:
 install:
   - pip install -U Flask==$FLASK_VERSION
 
-script: python department-app/setup.py
+script: python setup.py
