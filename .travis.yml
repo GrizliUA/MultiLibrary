@@ -8,3 +8,5 @@ env:
 
 install:
   - pip install -U Flask==$FLASK_VERSION
+
+script: python departhment-app/app.py
