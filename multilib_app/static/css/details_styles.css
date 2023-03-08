@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
+
+.details {
+    background-color: #191919;
+    color: #edf0f1;
+}
+
+.main-container {
+    width: 1130px;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-start;
+}
+
+.product-label {
+    max-width: 1130px;
+    padding-top: 150px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+
+.info-container{
+    width: 640px;
+    margin-left: 10px;
+}
+.info-label {
+    font-size: 16px;
+}
+.info-text {
+    font-size: 16px;
+}
+.image-container {
+    width: 240px;
+}
+.image-container img {
+    object-fit: cover;
+    display: grid;
+    height: 360px;
+    width: 240px;
+    justify-content: center;
+    overflow: hidden;
+    font-size: 0;
+}
+.image_btn {
+    font-size: 0;
+}
+.image_btn button {
+    position: relative;
+    text-decoration: none;
+    height: 50px;
+    color: #edf0f1;
+    border: none;
+    cursor: pointer;
+    background-color: #1d1e22;
+    text-align: center;
+}
+.btn-small {
+    width: 50px;
+    font-size: 30px;
+}
+.btn__list {
+    height: 50px;
+    bottom: 5px;
+    font-size: 20px;
+    width:140px;
+}
+.image_btn button:hover {
+    background-color: #191919;
+    color: rgba(0, 128, 255, 1);
+}
+
+.footer-container {
+    margin-top: 0;
+}

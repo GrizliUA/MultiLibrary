@@ -1,0 +1,92 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.main-container{
+    margin-top: 0;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #24252A;
+    border-radius: 20px;
+}
+
+.search-form-container {
+    height: 200px;
+    width: 650px;
+    font-size: 16px;
+    display: grid;
+    background-color: #1d1e22;
+    justify-content: center;
+    justify-items: center;
+    position: absolute;
+    text-align: center;
+    align-content: center;
+}
+
+
+
+/* TITLE */
+.search__title {
+    font-family: "Tilt Neon", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #edf0f1;
+    text-align: center;
+    background-color: #1d1e22;
+    margin-bottom: 15px;
+}
+.search__title:hover {
+    color: rgba(0, 128, 255, 1);
+}
+
+
+/* INPUT */
+.search {
+    background-color: #1d1e22;
+}
+.search-form__input {
+    height: 25px;
+    padding: 10px;
+    background-color: #24252A;
+    font-size: inherit;
+    border-radius: 20px;
+}
+.search-field{
+    width: 400px;
+}
+.search-date {
+    width: fit-content;
+    background-color: rgba(61, 255, 13, 0.3);
+    font-family: "Roboto Mono", monospace;
+    color: #ffffff;
+    font-size: 15px;
+    border: none;
+    align-items: center;
+}
+.search-date:hover {
+    background-color: rgba(61, 255, 13, 0.6);
+}
+::-webkit-calendar-picker-indicator {
+    background-color: #ffffff;
+    cursor: pointer;
+    border-radius: 3px;
+}
+/* BUTTON */
+.search-form_btn {
+    margin-top: 15px;
+    border: none;
+    cursor: pointer;
+    font-size: inherit;
+    background-color: rgba(0, 128, 255, 0.5);
+    color: #edf0f1;
+    padding: 10px 50px;
+    border-radius: 20px;
+}
+
+
+.search-form_btn:hover {
+    background-color: rgba(0, 128, 255, 1);
+}

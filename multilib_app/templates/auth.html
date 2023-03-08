@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MultiLib Authorization</title>
+    <link rel="stylesheet" href="/static/css/auth_styles.css">
+    <script src="/static/js/auth_script.js" defer></script>
+</head>
+<body>
+    <article class="container">
+        <div class="block">
+            <section class="block__item block-item">
+                <h2 class="block-item__title">You already have an account?</h2>
+                <button class="block-item__btn signin-btn">Login</button>
+            </section>
+            <section class="block__item block-item">
+                <h2 class="block-item__title">You don't have account?</h2>
+                <button class="block-item__btn signup-btn">Register</button>
+            </section>
+        </div>
+        <div class="form-box">
+            <form action="http://127.0.0.1:5000/" class="form form-signin">
+                <h3 class="form__title">Sign In</h3>
+                <p>
+                    <input type="text" class="form__input" placeholder="Username">
+                </p>
+                <p>
+                    <input type="password" class="form__input" placeholder="Password">
+                </p>
+                <p class="form-p__button">
+                    <button class="form__btn">Login</button>
+                </p>
+                <p class="form-p__forgot">
+                    <a href="#" class="form__forgot">Forgot a password</a>
+                </p>
+            </form>
+            <form action="http://127.0.0.1:5000/" class="form form-signup">
+                <h3 class="form__title">Sign Up</h3>
+                <p>
+                    <input type="text" class="form__input" placeholder="Username">
+                </p>
+                <p>
+                    <input type="email" class="form__input" placeholder="Email">
+                </p>
+                <p>
+                    <input type="password" class="form__input" placeholder="Password">
+                </p>
+                <p>
+                    <input type="password" class="form__input" placeholder="Repeat password">
+                </p>
+                <p>
+                    <button class="form__btn form__btn_signup">Register</button>
+                </p>
+            </form>
+        </div>
+    </article>
+</body>
+</html>
