@@ -7,7 +7,7 @@ install:
   - pip install -U Flask==$FLASK_VERSION
   - pip install coveralls
 script: 
-  - python setup.py install
-  - coverage run --source=home setup.py install --doctest-modules --pep8 coveralls -v --cov coveralls --cov-report term-missing
+  - coverage run -m pytest tests
+  - pylint app_folder
 after_success:
   - coveralls
