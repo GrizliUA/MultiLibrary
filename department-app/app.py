@@ -4,11 +4,9 @@ from flask import Flask, render_template
 app = Flask(__name__)
 @app.route('/')
 @app.route('/main')
-### Main page function
 def main():
-    ### Main page route
+    """ Main page function"""
     return render_template("main.html")
-    ### Main page route
 
 
 
