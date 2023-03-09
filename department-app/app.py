@@ -8,6 +8,8 @@ app = Flask(__name__)
 def main():
     ### Main page route
     return render_template("main.html")
+    ### Main page route
+
 
 
 @app.route('/movies')
