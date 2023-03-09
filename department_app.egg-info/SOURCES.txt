@@ -1,8 +1,0 @@
-README.md
-setup.py
-department_app.egg-info/PKG-INFO
-department_app.egg-info/SOURCES.txt
-department_app.egg-info/dependency_links.txt
-department_app.egg-info/not-zip-safe
-department_app.egg-info/requires.txt
-department_app.egg-info/top_level.txt
