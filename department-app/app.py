@@ -11,65 +11,56 @@ def main():
 
 
 @app.route('/movies')
-### movies page function
 def movies():
-    ### movies page route
+    """Movies page function"""
     return render_template("movies.html")
 
 
 @app.route('/serials')
-### serials page function
 def serials():
-    ### serials page route
+    """Serials page function"""
     return render_template("serials.html")
 
 
 @app.route('/books')
-### books page function
 def books():
-    ### books page route
+    """Books page function"""
     return render_template("books.html")
 
 
 @app.route('/anime')
-### anime page function
 def anime():
-    ### anime page route
+    """ Anime page function"""
     return render_template("anime.html")
 
 
 @app.route('/manga')
-### manga page function
 def manga():
-    ### manga page route
+    """ Manga page function"""
     return render_template("manga.html")
 
 
 @app.route('/search')
-### search page function
 def search():
-    ### search page route
+    """Search page function"""
     return render_template("search.html")
 
 
 @app.route('/auth')
-### auth page function
 def auth():
-    ### auth page route
+    """Auth page function"""
     return render_template("auth.html")
 
 
 @app.route('/profile')
-### profile page function
 def profile():
-    ### profile page route
+    """Profile page function"""
     return render_template("profile.html")
 
 
 @app.route('/product')
-### product page function
 def product():
-    ### product page route
+    """Product page function"""
     return render_template("product.html")
 
 
