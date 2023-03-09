@@ -1,12 +1,13 @@
 language: python
-
 python:
   - "3.9.7"
-
 env:
   - FLASK_VERSION=2.2.3
-
 install:
   - pip install -U Flask==$FLASK_VERSION
-
-script: python setup.py
+  - pip install coveralls
+script: 
+  - python setup.py
+  - coverage run --source=home setup.py
+after_success:
+  - coveralls
