@@ -1,3 +1,4 @@
+"""Module providing Flask realising hosting web-application at local instance"""
 from flask import Flask, render_template
 
 app = Flask(__name__)
