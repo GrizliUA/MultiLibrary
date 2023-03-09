@@ -7,7 +7,7 @@ install:
   - pip install -U Flask==$FLASK_VERSION
   - pip install coveralls
 script: 
-  - python setup.py test home
-  - coverage run --source=home setup.py test home
+  - python setup.py install
+  - coverage run --source=home setup.py install
 after_success:
   - coveralls
