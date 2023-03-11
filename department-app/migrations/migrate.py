@@ -1,3 +1,4 @@
+"""Module providing os functions"""
 import os
 
 os.system('python ./department-app/migrations/create_database.py')

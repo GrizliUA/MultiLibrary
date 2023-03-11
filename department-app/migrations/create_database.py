@@ -1,4 +1,4 @@
-"""Modules providing MySQL functions"""
+"""Module providing MySQL functions"""
 import mysql.connector
 
 mydb = mysql.connector.connect(

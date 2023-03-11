@@ -1,3 +1,4 @@
+"""Module providing MySQL functions"""
 import mysql.connector
 
 mydb = mysql.connector.connect(
@@ -16,6 +17,7 @@ cursor.execute("CREATE TABLE Items ("
             "item_video_link VARCHAR(255),"
             "item_photo_link VARCHAR(255),"
             "CONSTRAINT PK_Item PRIMARY KEY(item_id),"
-            "FOREIGN KEY (item_category_id) REFERENCES Categories(category_id) ON UPDATE CASCADE ON DELETE CASCADE);")
+            "FOREIGN KEY (item_category_id) REFERENCES Categories(category_id)"
+            "ON UPDATE CASCADE ON DELETE CASCADE);")
 mydb.commit()
 cursor.close()

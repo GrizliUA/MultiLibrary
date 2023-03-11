@@ -1,3 +1,4 @@
+"""Module providing MySQL functions"""
 import mysql.connector
 
 mydb = mysql.connector.connect(
@@ -11,6 +12,6 @@ cursor = mydb.cursor()
 cursor.execute("CREATE TABLE Categories("
             "category_id INT(11) AUTO_INCREMENT,"
             "label VARCHAR(100) NOT NULL,"
-            "CONSTRAINT PK_Category PRIMARY KEY (category_id));");
+            "CONSTRAINT PK_Category PRIMARY KEY (category_id));")
 mydb.commit()
 cursor.close()
