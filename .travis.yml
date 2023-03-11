@@ -5,6 +5,7 @@ env:
   - FLASK_VERSION=2.2.3
 install:
   - pip install -U Flask==$FLASK_VERSION
+  - pip install flask-mysqldb
   - pip install codecov
   - pip install pylint
   - pip install coveralls
