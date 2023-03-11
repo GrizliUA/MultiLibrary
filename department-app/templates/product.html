@@ -10,36 +10,38 @@
 </head>
 <body>
     <header class="header-container">
-        <nav>
-            <ul class="header-nav">
-                <li><a href="http://127.0.0.1:5000/movies" class="header-links">Movies</a></li>
-                <li><a href="http://127.0.0.1:5000/serials" class="header-links">Serials</a></li>
-                <li><a href="http://127.0.0.1:5000/books" class="header-links">Books</a></li>
-                <li><a href="http://127.0.0.1:5000/anime" class="header-links">Anime</a></li>
-                <li><a href="http://127.0.0.1:5000/manga" class="header-links">Manga</a></li>
-            </ul>
+        <nav class="header-nav">
+            <form class="form-inline" method="POST" action="{{url_for('items')}}">
+                <select name="item-choice" class="select-menu">
+                    {% for row in categories %}
+                    <option value="{{row.0}}">{{row.1}}</option>
+                    {% endfor  %}
+                </select>
+                <button type="submit" class="look-btn">Go</button>
+            </form>
         </nav>
         <a class="logo" href="http://127.0.0.1:5000/">MultiLib</a>
-        <form action="http://127.0.0.1:5000/search" role="form-search" id="form">
+        <form class="search-form" action="search.html" role="form-search" id="form">
             <input type="input-search" id="query" name="q"
-                placeholder="Find something else, here ->"
+                placeholder="Find something"
                 aria-label="Search through site content">
             <button class="search-button">
             <svg viewBox="0 0 1024 1024"><path class="search-svg" d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z"></path></svg>
             </button>   
         </form>
-        <a class="login-lable" href="http://127.0.0.1:5000/auth"><button class="login-button">Login</button></a>
+        <a class="login-lable" href="http://127.0.0.1:5000/auth"><button class="login-button">Profile</button></a>
         <label class="switch">
             <input type="checkbox" checked>
             <span class="slider round"></span>
         </label>
     </header>
     <main>
-        <section class="details">
-            <h1 class="product-label">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
+        {% for item in items %}
+        <section class="details">   
+            <h1 class="product-label">{{item.2}}</h1>
             <div class="main-container">
                 <div class="image-container">
-                    <img src="/static/images/anime_poster1.jpg" alt="">
+                    <img src="{{item.5}}" alt="image">
                     <div class="image_btn">
                         <button type="button" class="btn-small btn-thumb__up">👍</button>
                         <button type="button" class="btn-small btn-thumb__down">👎</button>
@@ -47,19 +49,14 @@
                     </div>
                 </div>
                 <div class="info-container">
-                    <video width="640" height="360" controls>
-                        <source src="" type="video/mp4">
-                      Your browser does not support the video tag.
-                      </video>
+                    <iframe width="640" height="360" src="{{item.4}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     <h5 class="info-label">Prehistory</h5>
-                    <p class="info-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod nemo consequuntur fugit ut inventore dolor impedit aperiam numquam est? Obcaecati ratione dolor tempore perferendis eligendi architecto sint soluta illo esse.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod nemo consequuntur fugit ut inventore dolor impedit aperiam numquam est? Obcaecati ratione dolor tempore perferendis eligendi architecto sint soluta illo esse.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod nemo consequuntur fugit ut inventore dolor impedit aperiam numquam est? Obcaecati ratione dolor tempore perferendis eligendi architecto sint soluta illo esse.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod nemo consequuntur fugit ut inventore dolor impedit aperiam numquam est? Obcaecati ratione dolor tempore perferendis eligendi architecto sint soluta illo esse.
+                    <p class="info-text">{{item.3}}
                     </p>
                 </div>
             </div>
         </section>
+        {% endfor  %}
     </main>
 </body>
 </html>
