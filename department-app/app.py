@@ -1,5 +1,5 @@
 """Module providing Flask realising hosting web-application at local instance"""
-from flask import Flask, render_template, request, url_for
+from flask import Flask, render_template, request
 """Module providing Flask be able to work with MySQL database"""
 from flask_mysqldb import MySQL
 
@@ -81,4 +81,3 @@ def product():
 
 if __name__ == "__main__":
     app.run(debug=True)
-    
