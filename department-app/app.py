@@ -1,7 +1,7 @@
-"""Module providing Flask realising hosting web-application at local instance"""
-from flask import Flask, render_template, request
-"""Module providing Flask be able to work with MySQL database"""
+"""Modules providing Flask realising hosting web-application at local instance"""
 from flask_mysqldb import MySQL
+from flask import Flask, render_template, request
+
 
 
 app = Flask(__name__)
