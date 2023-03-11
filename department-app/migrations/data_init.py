@@ -9,6 +9,28 @@ mydb = mysql.connector.connect(
 )
 
 cursor = mydb.cursor()
+
+
+cursor.execute("CREATE TABLE Categories("
+            "category_id INT(11) AUTO_INCREMENT,"
+            "label VARCHAR(100) NOT NULL,"
+            "CONSTRAINT PK_Category PRIMARY KEY (category_id));")
+mydb.commit()
+
+
+cursor.execute("CREATE TABLE Items ("
+            "item_id INT(11) AUTO_INCREMENT,"
+            "item_category_id INT(11) NOT NULL,"
+            "item_label VARCHAR(100) NOT NULL,"
+            "item_info TEXT,"
+            "item_video_link VARCHAR(255),"
+            "item_photo_link VARCHAR(255),"
+            "CONSTRAINT PK_Item PRIMARY KEY(item_id),"
+            "FOREIGN KEY (item_category_id) REFERENCES Categories(category_id)"
+            "ON UPDATE CASCADE ON DELETE CASCADE);")
+mydb.commit()
+
+
 cursor.execute("INSERT INTO Categories (label) VALUES"
             "('Movies'),"
             "('Books'),"
@@ -45,9 +67,8 @@ cursor.execute(
 "embed/bBD8M3WFrAw','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROUhw_cdYbqRXG7HRQp-"
 "7OwCBl_9SZANCKGA&usqp=CAU'),"
 
-"(1,'HELLOOOOOO','Lorem ipsum dolor sit amet, consectetur adipiscing elit','https://www.youtube.com/"
-"embed/tgbNymZ7vqY','https://cdn.britannica.com/38/200938-050-E22981D1/Freddie-Mercury-Live-Aid-"
-"Queen-Wembley-Stadium-July-13-1985.jpg');")
+"(1,'HELLOOOOOO','Lorem ipsum dolor sit amet, consectetur adipiscing elit','https://www.youtube."
+"com/embed/tgbNymZ7vqY','https://cdn.britannica.com/38/200938-050-E22981D1/Freddie-Mercury-Live"
+"-Aid-Queen-Wembley-Stadium-July-13-1985.jpg');")
 mydb.commit()
 cursor.close()
-
