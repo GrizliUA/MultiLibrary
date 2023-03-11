@@ -10,11 +10,9 @@ install:
   - pip install codecov
   - pip install pylint
   - pip install coveralls
-script: 
+script:
   - python setup.py install
-  - python /MIGRATE_FOLDER/001_create_categories_schema.py
-  - python /MIGRATE_FOLDER/002_create_items_schema.py
-  - python /MIGRATE_FOLDER/003_data_init.py
+  - python ./MIGRATE_FOLDER/migrate.py
   - coverage run setup.py install && coverage html
   - pylint department-app
 after_success:
