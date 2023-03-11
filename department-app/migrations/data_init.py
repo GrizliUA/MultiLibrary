@@ -11,14 +11,14 @@ mydb = mysql.connector.connect(
 cursor = mydb.cursor()
 
 
-cursor.execute("CREATE TABLE Categories("
+cursor.execute("CREATE TABLE IF NOT EXISTS Categories("
             "category_id INT(11) AUTO_INCREMENT,"
             "label VARCHAR(100) NOT NULL,"
             "CONSTRAINT PK_Category PRIMARY KEY (category_id));")
 mydb.commit()
 
 
-cursor.execute("CREATE TABLE Items ("
+cursor.execute("CREATE TABLE IF NOT EXISTS Items ("
             "item_id INT(11) AUTO_INCREMENT,"
             "item_category_id INT(11) NOT NULL,"
             "item_label VARCHAR(100) NOT NULL,"
