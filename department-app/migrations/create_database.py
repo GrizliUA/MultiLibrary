@@ -1,3 +1,4 @@
+"""Modules providing MySQL functions"""
 import mysql.connector
 
 mydb = mysql.connector.connect(
@@ -7,6 +8,6 @@ mydb = mysql.connector.connect(
 )
 
 cursor = mydb.cursor()
-cursor.execute("CREATE DATABASE IF NOT EXISTS multilib_db");
+cursor.execute("CREATE DATABASE IF NOT EXISTS multilib_db")
 mydb.commit()
 cursor.close()
