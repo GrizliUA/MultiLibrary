@@ -13,7 +13,7 @@ install:
 script:
   - python setup.py install
   - python ./MIGRATE_FOLDER/migrate.py
-  - coverage run setup.py install && coverage html
+  - coverage run setup.py install && coverage pylint department-app
   - pylint department-app
 after_success:
   - coveralls
