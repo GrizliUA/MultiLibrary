@@ -11,29 +11,37 @@
 <body>
     <header class="header-container">
         <nav class="header-nav">
-            <form class="form-inline" method="POST" action="{{url_for('items')}}">
-                <select name="item-choice" class="select-menu">
-                    {% for row in categories %}
-                    <option value="{{row.0}}">{{row.1}}</option>
-                    {% endfor  %}
-                </select>
-                <button type="submit" class="look-btn">Go</button>
-            </form>
+            <div class="header-btn-divs">
+                <form class="form-inline" method="POST" action="{{url_for('items')}}">
+                    <select name="item-choice" class="select-menu">
+                        {% for item in items %}
+                            {% for row in categories %}
+                                {% if item.1 == row.0 %}
+                                    <option value="{{row.0}}" selected>{{row.1}}</option>
+                                {% else %}
+                                    <option value="{{row.0}}">{{row.1}}</option>
+                                {% endif %}
+                            {% endfor  %}
+                        {% endfor  %}
+                    </select>
+                    <button type="submit" class="look-btn">Go</button>
+                </form>
+            </div>
+            <div class="header-btn-divs">
+                <form class="form-inline" method="get" action="{{url_for('selection_category')}}">
+                    <button type="submit" class="look-btn">✎</button>
+                </form>               
+            </div>
         </nav>
         <a class="logo" href="http://127.0.0.1:5000/">MultiLib</a>
         <form class="search-form" action="search.html" role="form-search" id="form">
-            <input type="input-search" id="query" name="q"
+            <input class="search-input" type="input-search" id="query" name="q"
                 placeholder="Find something"
                 aria-label="Search through site content">
             <button class="search-button">
             <svg viewBox="0 0 1024 1024"><path class="search-svg" d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z"></path></svg>
             </button>   
         </form>
-        <a class="login-lable" href="http://127.0.0.1:5000/auth"><button class="login-button">Profile</button></a>
-        <label class="switch">
-            <input type="checkbox" checked>
-            <span class="slider round"></span>
-        </label>
     </header>
     <main>
         {% for item in items %}
@@ -42,15 +50,21 @@
             <div class="main-container">
                 <div class="image-container">
                     <img src="{{item.5}}" alt="image">
-                    <div class="image_btn">
-                        <button type="button" class="btn-small btn-thumb__up">👍</button>
-                        <button type="button" class="btn-small btn-thumb__down">👎</button>
-                        <button type="button" class="btn__list">Add to list</button>
-                    </div>
+                    <form class="form-inline" method="get" action="http://127.0.0.1:5000/item/edit/{{item.0}}">
+                        <div class="image_btn">
+                            <button type="submit" class="btn__list">Edit</button>
+                        </div>
+                    </form>
+                    <form class="form-inline" method="post" action="http://127.0.0.1:5000/item/delete/{{item.0}}">
+                        <div class="image_btn">
+                            <button type="submit" class="btn__list">Delete</button>
+                        </div>
+                    </form>
+
                 </div>
                 <div class="info-container">
                     <iframe width="640" height="360" src="{{item.4}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    <h5 class="info-label">Prehistory</h5>
+                    <h5 class="info-label">Information</h5>
                     <p class="info-text">{{item.3}}
                     </p>
                 </div>

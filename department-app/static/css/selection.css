@@ -1,0 +1,18 @@
+.form-inline {
+    display: grid;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.error-container {
+    display: grid;
+    justify-items: center;
+}
+.error-container *{
+    margin-top: 3px;
+}
+
+.forms-container {
+    display: flex;
+    width: 575px;
+}

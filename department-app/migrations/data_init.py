@@ -13,7 +13,7 @@ cursor = mydb.cursor()
 
 cursor.execute("CREATE TABLE IF NOT EXISTS Categories("
             "category_id INT(11) AUTO_INCREMENT,"
-            "label VARCHAR(100) NOT NULL,"
+            "category_label VARCHAR(40) NOT NULL,"
             "CONSTRAINT PK_Category PRIMARY KEY (category_id));")
 mydb.commit()
 
@@ -31,7 +31,7 @@ cursor.execute("CREATE TABLE IF NOT EXISTS Items ("
 mydb.commit()
 
 
-cursor.execute("INSERT INTO Categories (label) VALUES"
+cursor.execute("INSERT INTO Categories (category_label) VALUES"
             "('Movies'),"
             "('Books'),"
             "('Details'),"
