@@ -36,72 +36,87 @@ def response_400(response='Bad Request'):
 @app.route('/main')
 def main():
     """Main page function"""
-    cur = mysql.connection.cursor()
-    cur.execute("SELECT * FROM categories")
-    data = cur.fetchall()
-    cur.close()
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT * FROM categories")
+        data = cur.fetchall()
+        cur.close()
 
-    return render_template('main.html', categories=data )
+        return render_template('main.html', categories=data )
+    except ValueError:
+        return redirect("http://127.0.0.1:5000/error")
 
 
 @app.route("/items" , methods=['GET', 'POST'])
 def items():
     """Items page function"""
-    cur = mysql.connection.cursor()
-    cur.execute("SELECT * FROM categories")
-    categories_data = cur.fetchall()
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT * FROM categories")
+        categories_data = cur.fetchall()
 
-    print(categories_data)
-    item_category_id = request.form.get("item_category_id")
-    print(item_category_id)
-    cur.execute(f"SELECT * FROM items WHERE item_category_id = {item_category_id}")
-    item_data = cur.fetchall()
-    cur.close()
+        item_category_id = request.form.get("item_category_id")
+        cur.execute(f"SELECT * FROM items WHERE item_category_id = {item_category_id}")
 
-    return render_template('items.html', categories=categories_data,items=item_data)
+        item_data = cur.fetchall()
+        cur.close()
+
+        return render_template('items.html', categories=categories_data,items=item_data)
+    except ValueError:
+        return redirect("http://127.0.0.1:5000/error")
 
 @app.route("/item/<string:id_data>" , methods=['GET', 'POST'])
 def item(id_data):
     """Item page function"""
-    cur = mysql.connection.cursor()
-    cur.execute("SELECT * FROM categories")
-    categories_data = cur.fetchall()
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT * FROM categories")
+        categories_data = cur.fetchall()
 
-    cur.execute(f"SELECT * FROM items WHERE item_id = {id_data}")
-    item_data = cur.fetchall()
-    cur.close()
+        cur.execute(f"SELECT * FROM items WHERE item_id = {id_data}")
+        item_data = cur.fetchall()
+        cur.close()
 
-    if not item_data:
-        return redirect(f"http://127.0.0.1:5000/error")
+        if not item_data:
+            return redirect("http://127.0.0.1:5000/error")
 
-    return render_template('item.html', categories=categories_data,items=item_data)
+        return render_template('item.html', categories=categories_data,items=item_data)
+    except ValueError:
+        return redirect("http://127.0.0.1:5000/error")
 
 @app.route('/search')
 def search():
     """Items page function"""
-    cur = mysql.connection.cursor()
-    cur.execute("SELECT * FROM categories")
-    categories_data = cur.fetchall()
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT * FROM categories")
+        categories_data = cur.fetchall()
+        cur.close()
 
-
-    return render_template('search.html', categories=categories_data)
+        return render_template('search.html', categories=categories_data)
+    except ValueError:
+        return redirect("http://127.0.0.1:5000/error")
 
 
 @app.route("/item/edit/<string:id_data>" , methods=['GET', 'POST'])
 def edit_item(id_data=None):
     """Edit page function"""
-    cur = mysql.connection.cursor()
-    cur.execute("SELECT * FROM categories")
-    categories_data = cur.fetchall()
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT * FROM categories")
+        categories_data = cur.fetchall()
+        
+        if id_data is not None:
+            cur.execute(f"SELECT * FROM items WHERE item_id = {id_data}")
+            data_item = cur.fetchall()
+            cur.close()
 
-    if id_data is not None:
-        cur.execute(f"SELECT * FROM items WHERE item_id = {id_data}")
-        data_item = cur.fetchall()
+            return render_template('edit_item.html', categories=categories_data,items=data_item)
         cur.close()
-        return render_template('edit_item.html', categories=categories_data,items=data_item)
-    cur.close()
 
-    return render_template('edit_item.html', categories=categories_data)
+        return render_template('edit_item.html', categories=categories_data)
+    except ValueError:
+        return redirect("http://127.0.0.1:5000/error")
 
 
 
@@ -110,56 +125,56 @@ def update_item():
     """Edit page function"""
     try:
         item_id = int(request.form["item_id"])
-        item_category_id = int(request.form["item_category_id"])
+
         item_update = ''
         for key, value in request.form.items():
             item_update += f"{key} = '{value}' , "
         item_update = item_update[15+len(str(item_id)):-3]
 
         cur = mysql.connection.cursor()
-        cur.execute(f"SELECT category_id FROM categories WHERE category_id = {item_category_id};")
-        categories_data = cur.fetchone()
-    
-        int(categories_data[0])
         cur.execute(f"UPDATE items SET {item_update} WHERE item_id = {item_id};")
         mysql.connection.commit()
         cur.close()
+        
         return redirect(f"http://127.0.0.1:5000/item/{item_id}")
-    except:
-        cur.close()
-        return render_template('error.html')
+    except ValueError:
+        return redirect("http://127.0.0.1:5000/error")
 
 
 @app.route('/error' , methods=['GET'])
 def error():
-    return render_template('error.html')
+    try:
+        return render_template('error.html')
+    except ValueError:
+        return response_400()
 
 @app.route('/item/add_item' , methods=['GET'])
 def add_item_item():
     """Edit page function"""
-    cur = mysql.connection.cursor()
-    cur.execute("SELECT * FROM categories")
-    categories_data = cur.fetchall()
-    cur.close()
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT * FROM categories")
+        categories_data = cur.fetchall()
+        cur.close()
 
-    return render_template('add_item.html', categories=categories_data)
+        return render_template('add_item.html', categories=categories_data)
+    except ValueError:
+        return redirect("http://127.0.0.1:5000/error")
 
 
 @app.route('/item/adding' , methods=['GET', 'POST'])
 def adding_item():
     """Edit page function"""
-    item_category_id = int(request.form["item_category_id"])
-    item_label = str(request.form["item_label"])
-    item_info = str(request.form["item_info"])
-    item_video_link = str(request.form["item_video_link"])
-    item_photo_link = str(request.form["item_photo_link"])
-    item_date = str(request.form["item_date"])
-    item_value = str(request.form["item_value"])
-    cur = mysql.connection.cursor()
-    cur.execute(f"SELECT category_id FROM categories WHERE category_id = {item_category_id};")
-    categories_data = cur.fetchone()
     try:
-        int(categories_data[0])
+        item_category_id = int(request.form["item_category_id"])
+        item_label = str(request.form["item_label"])
+        item_info = str(request.form["item_info"])
+        item_video_link = str(request.form["item_video_link"])
+        item_photo_link = str(request.form["item_photo_link"])
+        item_date = str(request.form["item_date"])
+        item_value = str(request.form["item_value"])
+
+        cur = mysql.connection.cursor()
         cur.execute(f"INSERT INTO Items (item_category_id,item_label,item_info,item_video_link,"
                     f"item_photo_link,item_date,item_value) VALUES ({item_category_id},"
                     f"'{item_label}','{item_info}','{item_video_link}','{item_photo_link}',"
@@ -168,26 +183,30 @@ def adding_item():
         cur.execute(f"SELECT item_id FROM items WHERE item_label = '{item_label}';")
         new_item_id = cur.fetchone()
         cur.close()
+
         return redirect(f"http://127.0.0.1:5000/item/{new_item_id[0]}")
-    except:
+    except ValueError:
         cur.close()
-        return redirect(f"http://127.0.0.1:5000/error")
+        return redirect("http://127.0.0.1:5000/error")
 
 @app.route('/item/delete/<string:id_data>' , methods=['GET', 'POST'])
 def delete_item(id_data):
     """Delete page function"""
-    return render_template('delete_item.html', id_data=id_data)
+    try:
+        return render_template('delete_item.html', id_data=id_data)
+    except ValueError:
+        return redirect("http://127.0.0.1:5000/error")
 
 @app.route('/item/deleting/<string:id_data>' , methods=['GET', 'POST'])
 def deleting_item(id_data):
-    """Deletein page function"""
+    """Deleting page function"""
     try:
         cur = mysql.connection.cursor()
         cur.execute(f"DELETE FROM items WHERE item_id={id_data};")
         mysql.connection.commit()
         cur.close()
-        return redirect(f"http://127.0.0.1:5000/")
-    except:
+        return redirect("http://127.0.0.1:5000/")
+    except ValueError:
         cur.close()
         return render_template('error.html')
 
@@ -196,73 +215,95 @@ def deleting_item(id_data):
 @app.route('/category/selection' , methods=['GET', 'POST'])
 def selection_category():
     """Delete page function"""
-    return render_template('selection.html')
+    try:
+        return render_template('selection.html')
+    except ValueError:
+        return redirect("http://127.0.0.1:5000/error")
 
 @app.route('/category/create' , methods=['GET', 'POST'])
 def add_category():
     """Delete page function"""
-    cur = mysql.connection.cursor()
-    cur.execute("SELECT  * FROM categories")
-    categories_data = cur.fetchall()
-    cur.close()
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT  * FROM categories")
+        categories_data = cur.fetchall()
+        cur.close()
 
-    return render_template('add_category.html', categories=categories_data)
+        return render_template('add_category.html', categories=categories_data)
+    except ValueError:
+        return redirect("http://127.0.0.1:5000/error")
 
 @app.route('/category/adding' , methods=['GET', 'POST'])
 def adding_category():
     """Delete page function"""
-    category_label = str(request.form["category-label"])
     try:
+        category_label = str(request.form["category-label"])
         cur = mysql.connection.cursor()
         cur.execute(f"INSERT INTO categories (category_label) VALUES ('{category_label}');")
         mysql.connection.commit()
         cur.close()
-        return redirect(f"http://127.0.0.1:5000/")
-    except:
-        return redirect(f"http://127.0.0.1:5000/error")
+        return redirect("http://127.0.0.1:5000/")
+    except ValueError:
+        return redirect("http://127.0.0.1:5000/error")
 
 
 @app.route('/category/edit' , methods=['GET', 'POST'])
 def edit_category():
     """Delete page function"""
-    cur = mysql.connection.cursor()
-    cur.execute("SELECT  * FROM categories")
-    categories_data = cur.fetchall()
-    cur.close()
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT  * FROM categories")
+        categories_data = cur.fetchall()
+        cur.close()
 
-    return render_template('edit_category.html', categories=categories_data)
+        return render_template('edit_category.html', categories=categories_data)
+    except ValueError:
+        return redirect("http://127.0.0.1:5000/error")
+
+
+
 
 @app.route('/category/update' , methods=['GET', 'POST'])
 def update_category():
     """Edit page function"""
-    category_id = int(request.form["category-id"])
-    category_label = str(request.form["category-label"])
     try:
+        category_id = int(request.form["category-id"])
+        category_label = str(request.form["category-label"])
+
         cur = mysql.connection.cursor()
         cur.execute(f"UPDATE categories SET category_label = '{category_label}'"
                     f" WHERE category_id = {category_id};")
         mysql.connection.commit()
         cur.close()
-        return redirect(f"http://127.0.0.1:5000/")
-    except:
+
+        return redirect("http://127.0.0.1:5000/")
+    except ValueError:
         return render_template('error.html')
 
 
 @app.route('/category/delete' , methods=['GET', 'POST'])
 def delete_category():
     """Delete page function"""
-    cur = mysql.connection.cursor()
-    cur.execute("SELECT  * FROM categories")
-    categories_data = cur.fetchall()
-    cur.close()
-    return render_template('delete_category.html', categories=categories_data)
+    try:
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT  * FROM categories")
+        categories_data = cur.fetchall()
+        cur.close()
+
+        return render_template('delete_category.html', categories=categories_data)
+    except ValueError:
+        return redirect("http://127.0.0.1:5000/error")
+
 
 @app.route('/category/delete-confirm' , methods=['GET', 'POST'])
 def delete_confirm_category():
     """Delete page function"""
-    category_id = int(request.form["category-id"])
-    return render_template('delete_confirm_category.html', delete_id=category_id)
+    try:
+        category_id = int(request.form["category-id"])
 
+        return render_template('delete_confirm_category.html', delete_id=category_id)
+    except ValueError:
+        return redirect("http://127.0.0.1:5000/error")
 
 
 
@@ -274,10 +315,10 @@ def deliting_category(delete_id=None):
         cur.execute(f"DELETE FROM categories WHERE category_id={delete_id};")
         mysql.connection.commit()
         cur.close()
-        return redirect(f"http://127.0.0.1:5000/")
-    except:
+        return redirect("http://127.0.0.1:5000/")
+    except ValueError:
         cur.close()
-        return redirect(f"http://127.0.0.1:5000/error")
+        return redirect("http://127.0.0.1:5000/error")
 
 
 
@@ -301,7 +342,7 @@ def deliting_category(delete_id=None):
 
 
 
-class api_category_create(Resource):
+class ApiCategoryCreate(Resource):
     def post(self,category_label):
         """Delete page function"""
         try:
@@ -315,7 +356,7 @@ class api_category_create(Resource):
 
             response = {"category_id": categories_data[0], "category_label": categories_data[1]}
             return response_201(response)
-        except:
+        except ValueError:
             try:
                 cur = mysql.connection.cursor()
                 cur.execute(f"SELECT * FROM categories WHERE category_label = '{category_label}'")
@@ -324,16 +365,17 @@ class api_category_create(Resource):
 
                 response = {"category_id": categories_data[0], "category_label": categories_data[1]}
                 return response_208(response)
-            except:
+            except ValueError:
                 return response_400()
-api.add_resource(api_category_create, '/api/category/create/<string:category_label>')
+api.add_resource(ApiCategoryCreate, '/api/category/create/<string:category_label>')
 
-class api_category_read(Resource):
+class ApiCategoryCead(Resource):
     def get(self,category_request):
         """Delete page function"""
         try:
             category_request = int(category_request)
-        except:pass
+        except:
+            pass
         try:
             cur = mysql.connection.cursor()
             if isinstance(category_request,int):
@@ -345,16 +387,17 @@ class api_category_read(Resource):
 
             response = {"category_id": categories_data[0], "category_label": categories_data[1]}
             return response_200(response)
-        except:
+        except ValueError:
             return response_400()
-api.add_resource(api_category_read, '/api/category/read/<string:category_request>')
+api.add_resource(ApiCategoryCead, '/api/category/read/<string:category_request>')
 
-class api_category_update(Resource):
+class ApiCategoryUpdate(Resource):
     def put(self,category_request):
         """Delete page function"""
         try:
             category_request = int(category_request)
-        except:pass
+        except:
+            pass
         try:
             category_label = str(request.args["category_label"])
             cur = mysql.connection.cursor()
@@ -375,16 +418,17 @@ class api_category_update(Resource):
 
             response = {"category_id": categories_data[0], "category_label": categories_data[1]}
             return response_202(response)
-        except:
+        except ValueError:
             return response_400()
-api.add_resource(api_category_update, '/api/category/update/<string:category_request>')
+api.add_resource(ApiCategoryUpdate, '/api/category/update/<string:category_request>')
 
-class api_category_delete(Resource):
+class ApiCategoryDelete(Resource):
     def delete(self,category_request):
         """Delete page function"""
         try:
             category_request = int(category_request)
-        except:pass
+        except:
+            pass
         try:
             cur = mysql.connection.cursor()
 
@@ -397,13 +441,13 @@ class api_category_delete(Resource):
             cur.close()
 
             return response_202()
-        except:
+        except ValueError:
             return response_400()
-api.add_resource(api_category_delete, '/api/category/delete/<string:category_request>')
+api.add_resource(ApiCategoryDelete, '/api/category/delete/<string:category_request>')
 
 
 
-class api_item_create(Resource):
+class ApiItemCreate(Resource):
     def post(self):
         """Delete page function"""
         try:
@@ -433,16 +477,17 @@ class api_item_create(Resource):
                         "item_date": item_data[6],
                         "item_value": item_data[7]}
             return response_201(response)
-        except:
+        except ValueError:
             return response_400()
-api.add_resource(api_item_create, '/api/item/create/')
+api.add_resource(ApiItemCreate, '/api/item/create/')
 
-class api_item_read(Resource):
+class ApiItemRead(Resource):
     def get(self,item_request):
         """Delete page function"""
         try:
             item_request = int(item_request)
-        except:pass
+        except:
+            pass
         try:
             cur = mysql.connection.cursor()
 
@@ -463,16 +508,17 @@ class api_item_read(Resource):
                         "item_date": item_data[6],
                         "item_value": item_data[7]}
             return response_200(response)
-        except:
+        except ValueError:
             return response_400()
-api.add_resource(api_item_read, '/api/item/read/<string:item_request>')
+api.add_resource(ApiItemRead, '/api/item/read/<string:item_request>')
 
-class api_item_update(Resource):
+class ApiItemUpdate(Resource):
     def put(self,item_request):
         """Delete page function"""
         try:
             item_request = int(item_request)
-        except:pass
+        except:
+            pass
         try:
             item_label = request.args['item_label']
             item_update = ''
@@ -502,16 +548,17 @@ class api_item_update(Resource):
                         "item_value": item_data[7]}
             cur.close()
             return response_200(response)
-        except:
+        except ValueError:
             return response_400()
-api.add_resource(api_item_update, '/api/item/update/<string:item_request>')
+api.add_resource(ApiItemUpdate, '/api/item/update/<string:item_request>')
 
-class api_item_delete(Resource):
+class ApiItemDelete(Resource):
     def delete(self,item_request):
         """Delete page function"""
         try:
             item_request = int(item_request)
-        except:pass
+        except:
+            pass
         try:
             cur = mysql.connection.cursor()
 
@@ -524,9 +571,9 @@ class api_item_delete(Resource):
 
             mysql.connection.commit()
             return response_202()
-        except:
+        except ValueError:
             return response_400()
-api.add_resource(api_item_delete, '/api/item/delete/<string:item_request>')
+api.add_resource(ApiItemDelete, '/api/item/delete/<string:item_request>')
 
 
 
