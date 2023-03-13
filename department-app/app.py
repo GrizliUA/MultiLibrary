@@ -25,13 +25,6 @@ def response_208(response='Already Reported'):
 def response_400(response='Bad Request'):
     return make_response(response,400)
 
-def check_item_null(db_item,rq_item):
-    if rq_item == '':
-        return db_item
-    else: return rq_item
-
-
-
 
 @app.route('/')
 @app.route('/main')
