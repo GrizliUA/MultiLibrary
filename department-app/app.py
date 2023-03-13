@@ -51,7 +51,7 @@ def main():
         cur.close()
 
         return render_template('main.html', categories=categories_data)
-    except (Exception,):
+    except (Exception,): # pylint: disable=broad-except
         return redirect("http://127.0.0.1:5000/error")
 
 
@@ -106,7 +106,7 @@ def item_search():
         cur.close()
 
         return render_template('search.html', categories=categories_data, writed_request=req)
-    except (Exception,):
+    except (Exception,): # pylint: disable=broad-except
         return redirect("http://127.0.0.1:5000/error")
 
 @app.route('/item/searching', methods=['GET', 'POST'])
