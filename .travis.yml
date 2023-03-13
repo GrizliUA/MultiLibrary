@@ -7,6 +7,7 @@ env:
 install:
   - pip install -U Flask==$FLASK_VERSION
   - pip install flask-mysqldb
+  - pip install flask_restful
   - pip install codecov
   - pip install pylint
   - pip install coveralls
