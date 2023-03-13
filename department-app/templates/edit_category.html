@@ -6,13 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MultiLib</title>
     <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="/static/css/edit.css">
 </head>
 <body>
     <header class="header-container">
         <nav class="header-nav">
             <div class="header-btn-divs">
                 <form class="form-inline" method="POST" action="{{url_for('items')}}">
-                    <select name="item-choice" class="select-menu">
+                    <select name="category-choice" class="select-menu">
                         {% for row in categories %}
                             <option value="{{row.0}}">{{row.1}}</option>
                         {% endfor  %}
@@ -39,32 +40,28 @@
     <main>
         <main>
             <div class="main-container">
-                {% for row in items %}
-                <section class="main-container-section">
-                    <ul class="main-row">
-                        <li class="main-poster">
-                            <a href="http://127.0.0.1:5000/item/{{row.0}}">
-                                <img src="{{row.5}}" alt="poster" class="poster-img-link">
-                            </a>
-                            <a class="poster-text-link" href="http://127.0.0.1:5000/item/{{row.0}}">
-                                {{row.2}}
-                            </a>
-                        </li>
-                    </ul>                
-                </section>
-                {% endfor  %}
-                <section class="main-container-section">
-                    <ul class="main-row">
-                        <li class="main-poster">
-                            <a href="http://127.0.0.1:5000/item/add_item">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdi1SF2ow79ejUkxF2Z96HZSIKMIxYYKj2XQ&usqp=CAU" alt="poster" class="poster-img-link">
-                            </a>
-                            <a class="poster-text-link" href="http://127.0.0.1:5000/item/add_item">
-                                Add an item
-                            </a>
-                        </li>
-                    </ul>                
-                </section>
+                    <form class="edit-form" method="POST" action="http://127.0.0.1:5000/category/update">
+                        <div class="inner-form-container">
+                            <div class="form-small-inputs">
+                                <div class="small-form-div">
+                                    <label>Old Name:</label>
+                                    <select name="category-id" class="category-select">
+                                        {% for row in categories %}
+                                            <option value="{{row.0}}">{{row.1}}</option>
+                                        {% endfor  %}
+                                    </select>
+                                </div>
+                                <div class="small-form-div">
+                                    <label>New Name:</label>
+                                    <input class="category-select" type="text" id="category-label" name="category-label" value="" required>
+                                </div>                                
+                            </div>
+                            <div class="form-buttons">
+                                <button type="submit" class="look-btn edit-category-btn">Apply</button>
+                                <button type="reset" class="look-btn edit-category-btn">Reset</button>
+                            </div>
+                        </div>
+                    </form>
             </div>
     </main>
 </body>

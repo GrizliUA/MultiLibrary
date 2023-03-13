@@ -4,11 +4,10 @@ body{
 }
 
 .main-container{
-    margin-top: 0;
-    height: 90vh;
+    padding-top: 15em;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     background-color: #24252A;
     border-radius: 20px;
 }
