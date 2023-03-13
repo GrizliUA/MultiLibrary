@@ -62,3 +62,8 @@
 .edit-category-btn {
     margin: 0 5px 0 5px;
 }
+
+.form-small-inputs-container {
+    display: flex;
+    align-items: center;
+}

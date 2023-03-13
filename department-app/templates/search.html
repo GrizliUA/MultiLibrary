@@ -12,7 +12,7 @@
     <header class="header-container">
         <nav class="header-nav">
             <form class="form-inline" method="POST" action="http://127.0.0.1:5000/items">
-                <select id="mySelect" name="item-choice" class="select-menu">
+                <select id="mySelect" name="item_category_id" class="select-menu">
                     {% for row in categories %}
                         <option value="{{row.0}}">{{row.1}}</option>
                     {% endfor  %}

@@ -71,3 +71,12 @@
 .footer-container {
     margin-top: 0;
 }
+
+.add-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.add-info p{
+    font-size: 20px;
+}

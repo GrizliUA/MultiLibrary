@@ -13,7 +13,7 @@
         <nav class="header-nav">
             <div class="header-btn-divs">
                 <form class="form-inline" method="POST" action="{{url_for('items')}}">
-                    <select name="item-choice" class="select-menu">
+                    <select name="item_category_id" class="select-menu">
                         {% for row in categories %}
                             <option value="{{row.0}}">{{row.1}}</option>
                         {% endfor  %}
@@ -43,21 +43,27 @@
                 <form class="edit-form" method="POST" action="http://127.0.0.1:5000/item/adding">
                     <div class="inner-form-container">
                         <div class="form-category selector">
-                            <label for="item-label">Category:</label>
-                            <select name="item-choice" class="category-select">
+                            <label for="item_label">Category:</label>
+                            <select name="item_category_id" class="category-select">
                                 {% for row in categories %}
                                     <option value="{{row.0}}">{{row.1}}</option>
                                 {% endfor  %}
                             </select>
                         </div>
-                        <label for="item-label">Label:</label>
-                        <input class="form-inputs" type="text" id="item-label" name="item-label" value="" required>
-                        <label for="item-info">Info:</label>
-                        <input class="form-inputs" type="text" id="item-info" name="item-info" value="" required>
-                        <label for="item-video-link">Embed video Link:</label>
-                        <input class="form-inputs" type="url" id="item-video-link" name="item-video-link" value="">
-                        <label for="item-photo-link">Photo Link:</label>
-                        <input class="form-inputs" type="url" id="item-photo-link" name="item-photo-link" value="">
+                        <label for="item_label">Label:</label>
+                        <input class="form-inputs" type="text" id="item_label" name="item_label" value="" required>
+                        <label for="item_info">Info:</label>
+                        <input class="form-inputs" type="text" id="item_info" name="item_info" value="" required>
+                        <label for="item_video_link">Embed video Link:</label>
+                        <input class="form-inputs" type="url" id="item_video_link" name="item_video_link" value="">
+                        <label for="item_photo_link">Photo Link:</label>
+                        <input class="form-inputs" type="url" id="item_photo_link" name="item_photo_link" value="">
+                        <div class="form-small-inputs-container">
+                            <label for="item_date">Year:</label>
+                            <input class="small-form-inputs" type="number" id="item_date" name="item_date" min="1900" max="2099" step="1" value="2003" />
+                            <label for="item_value">Value:</label>
+                            <input class="small-form-inputs" type="number" id="item_value" name="item_value" min="0" max="10" step="0.1" value="5" />
+                        </div>
                         <div class="form-buttons">
                             <button type="submit" class="look-btn">Create</button>
                             <button type="reset" class="look-btn">Reset</button>
