@@ -1,11 +1,12 @@
 """Modules providing Flask realising hosting web-application at local instance"""
-from flask_mysqldb import MySQL
-from flask import Flask, render_template, request, redirect, make_response
-from flask_restful import Resource, Api
 from urllib.request import urlopen
 import json
 import logging
 from logging.handlers import RotatingFileHandler
+from flask_mysqldb import MySQL
+from flask import Flask, render_template, request, redirect, make_response
+from flask_restful import Resource, Api
+
 
 
 
@@ -68,7 +69,8 @@ def items():
         item_data = cur.fetchall()
         cur.close()
 
-        return render_template('items.html', categories=categories_data, item_data=item_data, item_category_id=item_category_id)
+        return render_template('items.html', categories=categories_data,
+                               item_data=item_data, item_category_id=item_category_id)
     except:
         return redirect("http://127.0.0.1:5000/error")
 
@@ -630,13 +632,14 @@ class ApiItemSearch(Resource):
             cur = mysql.connection.cursor()
             if not item_keys:
                 return response_400()
-            
-            for i in range(0,len(item_keys)):
+
+
+            for i, index in enumerate(item_keys):
                 cur.execute(f"SELECT * FROM items WHERE {item_keys[i]} = '{item_values[i]}';")
                 item_data = cur.fetchone()
                 if item_data:
                     break
-                
+
             if not item_data:
                 return response_404()
             cur.close()
@@ -648,7 +651,7 @@ class ApiItemSearch(Resource):
                         "item_photo_link": item_data[5],
                         "item_date": item_data[6],
                         "item_value": item_data[7]}
-            
+
             return response_200(response)
         except:
             return response_400()
@@ -666,5 +669,3 @@ if __name__ == "__main__":
     handler.setFormatter(frmt)
     log.addHandler(handler)
     app.run(host='0.0.0.0', debug=True)
-
-    
