@@ -45,7 +45,7 @@
                         <label>Choose category you wanna delete:</label>
                         <div class="form-small-inputs">
                             <div class="small-form-div">
-                                <select name="category-id" class="category-select">
+                                <select name="category-id" id="category-id" class="category-select">
                                     {% for row in categories %}
                                         <option value="{{row.0}}">{{row.1}}</option>
                                     {% endfor  %}

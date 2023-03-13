@@ -329,7 +329,7 @@ def delete_category():
 def delete_confirm_category():
     """Delete page function"""
     try:
-        category_id = int(request.form["category-id"])
+        category_id = int(request.args["category-id"])
 
         return render_template('delete_confirm_category.html', delete_id=category_id)
     except:

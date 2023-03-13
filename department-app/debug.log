@@ -709,3 +709,232 @@
 2023-03-13 17:39:07,902 - INFO - Thread-3 - 127.0.0.1 - - [13/Mar/2023 17:39:07] "GET /api/item/search/?item_category_id=3&Item_id=27&item_date=200&item_label= HTTP/1.1" 200 -
 2023-03-13 17:39:10,202 - INFO - Thread-4 - 127.0.0.1 - - [13/Mar/2023 17:39:10] "GET /api/item/search/?item_category_id=3&item_label= HTTP/1.1" 200 -
 2023-03-13 17:39:14,004 - INFO - Thread-5 - 127.0.0.1 - - [13/Mar/2023 17:39:14] "GET /api/item/search/?item_label=&item_category_id=3 HTTP/1.1" 200 -
+2023-03-13 18:14:35,666 - INFO - MainThread - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.104:5000
+2023-03-13 18:14:35,666 - INFO - MainThread - [33mPress CTRL+C to quit[0m
+2023-03-13 18:14:35,668 - INFO - MainThread -  * Restarting with stat
+2023-03-13 18:14:35,974 - WARNING - MainThread -  * Debugger is active!
+2023-03-13 18:14:35,978 - INFO - MainThread -  * Debugger PIN: 889-480-187
+2023-03-13 18:14:59,760 - INFO - Thread-2 - 127.0.0.1 - - [13/Mar/2023 18:14:59] "GET /error HTTP/1.1" 200 -
+2023-03-13 18:15:00,301 - INFO - Thread-3 - 127.0.0.1 - - [13/Mar/2023 18:15:00] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2023-03-13 18:15:00,301 - INFO - Thread-4 - 127.0.0.1 - - [13/Mar/2023 18:15:00] "[36mGET /static/css/error.css HTTP/1.1[0m" 304 -
+2023-03-13 18:15:03,778 - INFO - Thread-5 - 127.0.0.1 - - [13/Mar/2023 18:15:03] "GET / HTTP/1.1" 200 -
+2023-03-13 18:15:03,876 - INFO - Thread-6 - 127.0.0.1 - - [13/Mar/2023 18:15:03] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2023-03-13 18:15:16,448 - INFO - Thread-7 - 127.0.0.1 - - [13/Mar/2023 18:15:16] "GET / HTTP/1.1" 200 -
+2023-03-13 18:15:16,552 - INFO - Thread-8 - 127.0.0.1 - - [13/Mar/2023 18:15:16] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2023-03-13 18:15:18,458 - INFO - Thread-9 - 127.0.0.1 - - [13/Mar/2023 18:15:18] "GET /item/add_item HTTP/1.1" 200 -
+2023-03-13 18:15:18,553 - INFO - Thread-10 - 127.0.0.1 - - [13/Mar/2023 18:15:18] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2023-03-13 18:15:18,558 - INFO - Thread-11 - 127.0.0.1 - - [13/Mar/2023 18:15:18] "GET /static/css/edit.css HTTP/1.1" 200 -
+2023-03-13 18:15:30,456 - INFO - Thread-12 - 127.0.0.1 - - [13/Mar/2023 18:15:30] "[32mPOST /item/adding HTTP/1.1[0m" 302 -
+2023-03-13 18:15:30,471 - INFO - Thread-13 - 127.0.0.1 - - [13/Mar/2023 18:15:30] "GET /item/36 HTTP/1.1" 200 -
+2023-03-13 18:15:30,573 - INFO - Thread-14 - 127.0.0.1 - - [13/Mar/2023 18:15:30] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2023-03-13 18:15:30,576 - INFO - Thread-15 - 127.0.0.1 - - [13/Mar/2023 18:15:30] "GET /static/css/details_styles.css HTTP/1.1" 200 -
+2023-03-13 18:15:30,579 - INFO - Thread-17 - 127.0.0.1 - - [13/Mar/2023 18:15:30] "GET /static/images/no_video.png HTTP/1.1" 200 -
+2023-03-13 18:15:30,579 - INFO - Thread-16 - 127.0.0.1 - - [13/Mar/2023 18:15:30] "[36mGET /static/images/no_image.png HTTP/1.1[0m" 304 -
+2023-03-13 18:15:44,889 - INFO - Thread-18 - 127.0.0.1 - - [13/Mar/2023 18:15:44] "POST /item/delete/36 HTTP/1.1" 200 -
+2023-03-13 18:15:44,983 - INFO - Thread-19 - 127.0.0.1 - - [13/Mar/2023 18:15:44] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2023-03-13 18:15:44,987 - INFO - Thread-20 - 127.0.0.1 - - [13/Mar/2023 18:15:44] "[36mGET /static/css/error.css HTTP/1.1[0m" 304 -
+2023-03-13 18:15:44,987 - INFO - Thread-21 - 127.0.0.1 - - [13/Mar/2023 18:15:44] "GET /static/css/delete.css HTTP/1.1" 200 -
+2023-03-13 18:15:46,596 - INFO - Thread-22 - 127.0.0.1 - - [13/Mar/2023 18:15:46] "GET /item/36 HTTP/1.1" 200 -
+2023-03-13 18:15:46,683 - INFO - Thread-23 - 127.0.0.1 - - [13/Mar/2023 18:15:46] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2023-03-13 18:15:46,689 - INFO - Thread-24 - 127.0.0.1 - - [13/Mar/2023 18:15:46] "[36mGET /static/css/details_styles.css HTTP/1.1[0m" 304 -
+2023-03-13 18:15:46,691 - INFO - Thread-26 - 127.0.0.1 - - [13/Mar/2023 18:15:46] "[36mGET /static/images/no_video.png HTTP/1.1[0m" 304 -
+2023-03-13 18:15:46,692 - INFO - Thread-25 - 127.0.0.1 - - [13/Mar/2023 18:15:46] "[36mGET /static/images/no_image.png HTTP/1.1[0m" 304 -
+2023-03-13 18:15:47,631 - INFO - Thread-27 - 127.0.0.1 - - [13/Mar/2023 18:15:47] "POST /item/delete/36 HTTP/1.1" 200 -
+2023-03-13 18:15:47,735 - INFO - Thread-28 - 127.0.0.1 - - [13/Mar/2023 18:15:47] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2023-03-13 18:15:47,738 - INFO - Thread-29 - 127.0.0.1 - - [13/Mar/2023 18:15:47] "[36mGET /static/css/error.css HTTP/1.1[0m" 304 -
+2023-03-13 18:15:47,740 - INFO - Thread-30 - 127.0.0.1 - - [13/Mar/2023 18:15:47] "[36mGET /static/css/delete.css HTTP/1.1[0m" 304 -
+2023-03-13 18:15:48,579 - INFO - Thread-31 - 127.0.0.1 - - [13/Mar/2023 18:15:48] "[32mPOST /item/deleting/36 HTTP/1.1[0m" 302 -
+2023-03-13 18:15:48,587 - INFO - Thread-32 - 127.0.0.1 - - [13/Mar/2023 18:15:48] "GET / HTTP/1.1" 200 -
+2023-03-13 18:15:48,673 - INFO - Thread-33 - 127.0.0.1 - - [13/Mar/2023 18:15:48] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2023-03-13 18:15:49,767 - INFO - Thread-34 - 127.0.0.1 - - [13/Mar/2023 18:15:49] "GET /item/add_item HTTP/1.1" 200 -
+2023-03-13 18:15:49,864 - INFO - Thread-35 - 127.0.0.1 - - [13/Mar/2023 18:15:49] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2023-03-13 18:15:49,869 - INFO - Thread-36 - 127.0.0.1 - - [13/Mar/2023 18:15:49] "[36mGET /static/css/edit.css HTTP/1.1[0m" 304 -
+2023-03-13 18:15:53,309 - INFO - Thread-37 - 127.0.0.1 - - [13/Mar/2023 18:15:53] "GET /category/selection HTTP/1.1" 200 -
+2023-03-13 18:15:53,405 - INFO - Thread-38 - 127.0.0.1 - - [13/Mar/2023 18:15:53] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2023-03-13 18:15:53,410 - INFO - Thread-39 - 127.0.0.1 - - [13/Mar/2023 18:15:53] "[36mGET /static/css/selection.css HTTP/1.1[0m" 304 -
+2023-03-13 18:15:56,995 - INFO - Thread-40 - 127.0.0.1 - - [13/Mar/2023 18:15:56] "GET /category/delete HTTP/1.1" 200 -
+2023-03-13 18:15:57,091 - INFO - Thread-41 - 127.0.0.1 - - [13/Mar/2023 18:15:57] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2023-03-13 18:15:57,095 - INFO - Thread-42 - 127.0.0.1 - - [13/Mar/2023 18:15:57] "[36mGET /static/css/delete.css HTTP/1.1[0m" 304 -
+2023-03-13 18:15:58,466 - INFO - Thread-43 - 127.0.0.1 - - [13/Mar/2023 18:15:58] "[32mGET /category/delete-confirm?category-id=2 HTTP/1.1[0m" 302 -
+2023-03-13 18:15:58,471 - INFO - Thread-44 - 127.0.0.1 - - [13/Mar/2023 18:15:58] "GET /error HTTP/1.1" 200 -
+2023-03-13 18:15:58,567 - INFO - Thread-45 - 127.0.0.1 - - [13/Mar/2023 18:15:58] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2023-03-13 18:15:58,571 - INFO - Thread-46 - 127.0.0.1 - - [13/Mar/2023 18:15:58] "[36mGET /static/css/error.css HTTP/1.1[0m" 304 -
+2023-03-13 18:16:08,302 - INFO - Thread-47 - 127.0.0.1 - - [13/Mar/2023 18:16:08] "[32mGET /category/delete-confirm?category-id=2 HTTP/1.1[0m" 302 -
+2023-03-13 18:16:08,307 - INFO - Thread-48 - 127.0.0.1 - - [13/Mar/2023 18:16:08] "GET /error HTTP/1.1" 200 -
+2023-03-13 18:16:08,415 - INFO - Thread-49 - 127.0.0.1 - - [13/Mar/2023 18:16:08] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2023-03-13 18:16:08,418 - INFO - Thread-50 - 127.0.0.1 - - [13/Mar/2023 18:16:08] "[36mGET /static/css/error.css HTTP/1.1[0m" 304 -
+2023-03-13 18:16:19,616 - INFO - Thread-51 - 127.0.0.1 - - [13/Mar/2023 18:16:19] "[32mGET /category/delete-confirm?category-id=5 HTTP/1.1[0m" 302 -
+2023-03-13 18:16:19,621 - INFO - Thread-52 - 127.0.0.1 - - [13/Mar/2023 18:16:19] "GET /error HTTP/1.1" 200 -
+2023-03-13 18:16:19,723 - INFO - Thread-53 - 127.0.0.1 - - [13/Mar/2023 18:16:19] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2023-03-13 18:16:19,726 - INFO - Thread-54 - 127.0.0.1 - - [13/Mar/2023 18:16:19] "[36mGET /static/css/error.css HTTP/1.1[0m" 304 -
+2023-03-13 18:16:22,364 - INFO - Thread-55 - 127.0.0.1 - - [13/Mar/2023 18:16:22] "[32mGET /category/delete-confirm?category-id=3 HTTP/1.1[0m" 302 -
+2023-03-13 18:16:22,369 - INFO - Thread-56 - 127.0.0.1 - - [13/Mar/2023 18:16:22] "GET /error HTTP/1.1" 200 -
+2023-03-13 18:16:22,466 - INFO - Thread-57 - 127.0.0.1 - - [13/Mar/2023 18:16:22] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2023-03-13 18:16:22,468 - INFO - Thread-58 - 127.0.0.1 - - [13/Mar/2023 18:16:22] "[36mGET /static/css/error.css HTTP/1.1[0m" 304 -
+2023-03-13 18:16:26,886 - INFO - Thread-59 - 127.0.0.1 - - [13/Mar/2023 18:16:26] "[32mGET /category/delete-confirm?category-id=7 HTTP/1.1[0m" 302 -
+2023-03-13 18:16:26,891 - INFO - Thread-60 - 127.0.0.1 - - [13/Mar/2023 18:16:26] "GET /error HTTP/1.1" 200 -
+2023-03-13 18:16:26,989 - INFO - Thread-61 - 127.0.0.1 - - [13/Mar/2023 18:16:26] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2023-03-13 18:16:26,991 - INFO - Thread-62 - 127.0.0.1 - - [13/Mar/2023 18:16:26] "[36mGET /static/css/error.css HTTP/1.1[0m" 304 -
+2023-03-13 18:19:59,743 - INFO - Thread-65 - 127.0.0.1 - - [13/Mar/2023 18:19:59] "[32mGET /category/delete-confirm HTTP/1.1[0m" 302 -
+2023-03-13 18:19:59,748 - INFO - Thread-66 - 127.0.0.1 - - [13/Mar/2023 18:19:59] "GET /error HTTP/1.1" 200 -
+2023-03-13 18:19:59,934 - INFO - Thread-67 - 127.0.0.1 - - [13/Mar/2023 18:19:59] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2023-03-13 18:19:59,935 - INFO - Thread-68 - 127.0.0.1 - - [13/Mar/2023 18:19:59] "[36mGET /static/css/error.css HTTP/1.1[0m" 304 -
+2023-03-13 18:20:29,314 - INFO - MainThread -  * Detected change in 'c:\\Users\\ADMIN\\Desktop\\EPAM_Final_Project\\department-app\\app.py', reloading
+2023-03-13 18:20:29,350 - INFO - MainThread -  * Restarting with stat
+2023-03-13 18:20:29,679 - WARNING - MainThread -  * Debugger is active!
+2023-03-13 18:20:29,683 - INFO - MainThread -  * Debugger PIN: 889-480-187
+2023-03-13 18:22:12,686 - INFO - Thread-2 - 127.0.0.1 - - [13/Mar/2023 18:22:12] "[32mGET /category/delete-confirm?category-id=7 HTTP/1.1[0m" 302 -
+2023-03-13 18:22:12,694 - INFO - Thread-3 - 127.0.0.1 - - [13/Mar/2023 18:22:12] "GET /error HTTP/1.1" 200 -
+2023-03-13 18:22:13,111 - INFO - Thread-4 - 127.0.0.1 - - [13/Mar/2023 18:22:13] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2023-03-13 18:22:13,111 - INFO - Thread-5 - 127.0.0.1 - - [13/Mar/2023 18:22:13] "[36mGET /static/css/error.css HTTP/1.1[0m" 304 -
+2023-03-13 18:22:22,885 - INFO - Thread-6 - 127.0.0.1 - - [13/Mar/2023 18:22:22] "[32mGET /category/delete-confirm?category-id=7 HTTP/1.1[0m" 302 -
+2023-03-13 18:22:22,890 - INFO - Thread-7 - 127.0.0.1 - - [13/Mar/2023 18:22:22] "GET /error HTTP/1.1" 200 -
+2023-03-13 18:22:22,998 - INFO - Thread-8 - 127.0.0.1 - - [13/Mar/2023 18:22:22] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2023-03-13 18:22:23,000 - INFO - Thread-9 - 127.0.0.1 - - [13/Mar/2023 18:22:23] "[36mGET /static/css/error.css HTTP/1.1[0m" 304 -
+2023-03-13 18:22:32,507 - INFO - MainThread -  * Detected change in 'c:\\Users\\ADMIN\\Desktop\\EPAM_Final_Project\\department-app\\app.py', reloading
+2023-03-13 18:22:32,532 - INFO - MainThread -  * Restarting with stat
+2023-03-13 18:22:32,822 - WARNING - MainThread -  * Debugger is active!
+2023-03-13 18:22:32,826 - INFO - MainThread -  * Debugger PIN: 889-480-187
+2023-03-13 18:22:35,280 - INFO - MainThread -  * Detected change in 'c:\\Users\\ADMIN\\Desktop\\EPAM_Final_Project\\department-app\\app.py', reloading
+2023-03-13 18:22:35,311 - INFO - MainThread -  * Restarting with stat
+2023-03-13 18:22:35,642 - WARNING - MainThread -  * Debugger is active!
+2023-03-13 18:22:35,646 - INFO - MainThread -  * Debugger PIN: 889-480-187
+2023-03-13 18:22:35,778 - INFO - Thread-2 - 127.0.0.1 - - [13/Mar/2023 18:22:35] "GET / HTTP/1.1" 200 -
+2023-03-13 18:22:36,044 - INFO - Thread-3 - 127.0.0.1 - - [13/Mar/2023 18:22:36] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2023-03-13 18:22:37,468 - INFO - Thread-4 - 127.0.0.1 - - [13/Mar/2023 18:22:37] "GET /category/delete-confirm?category-id=7 HTTP/1.1" 200 -
+2023-03-13 18:22:37,564 - INFO - Thread-5 - 127.0.0.1 - - [13/Mar/2023 18:22:37] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2023-03-13 18:22:37,567 - INFO - Thread-6 - 127.0.0.1 - - [13/Mar/2023 18:22:37] "[36mGET /static/css/error.css HTTP/1.1[0m" 304 -
+2023-03-13 18:22:37,569 - INFO - Thread-7 - 127.0.0.1 - - [13/Mar/2023 18:22:37] "[36mGET /static/css/delete.css HTTP/1.1[0m" 304 -
+2023-03-13 18:22:41,604 - INFO - Thread-8 - 127.0.0.1 - - [13/Mar/2023 18:22:41] "[32mPOST /category/deleting/7 HTTP/1.1[0m" 302 -
+2023-03-13 18:22:41,610 - INFO - Thread-9 - 127.0.0.1 - - [13/Mar/2023 18:22:41] "GET / HTTP/1.1" 200 -
+2023-03-13 18:22:41,709 - INFO - Thread-10 - 127.0.0.1 - - [13/Mar/2023 18:22:41] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2023-03-13 18:22:49,653 - INFO - Thread-11 - 127.0.0.1 - - [13/Mar/2023 18:22:49] "GET / HTTP/1.1" 200 -
+2023-03-13 18:22:49,751 - INFO - Thread-12 - 127.0.0.1 - - [13/Mar/2023 18:22:49] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2023-03-13 18:22:51,922 - INFO - Thread-13 - 127.0.0.1 - - [13/Mar/2023 18:22:51] "GET / HTTP/1.1" 200 -
+2023-03-13 18:22:52,011 - INFO - Thread-14 - 127.0.0.1 - - [13/Mar/2023 18:22:52] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2023-03-13 18:23:12,394 - INFO - Thread-15 - 127.0.0.1 - - [13/Mar/2023 18:23:12] "POST /items HTTP/1.1" 200 -
+2023-03-13 18:23:12,495 - INFO - Thread-16 - 127.0.0.1 - - [13/Mar/2023 18:23:12] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2023-03-13 18:23:12,506 - INFO - Thread-17 - 127.0.0.1 - - [13/Mar/2023 18:23:12] "[36mGET /static/images/no_image.png HTTP/1.1[0m" 304 -
+2023-03-13 18:23:13,111 - INFO - Thread-18 - 127.0.0.1 - - [13/Mar/2023 18:23:13] "GET /item/5 HTTP/1.1" 200 -
+2023-03-13 18:23:13,214 - INFO - Thread-19 - 127.0.0.1 - - [13/Mar/2023 18:23:13] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2023-03-13 18:23:13,215 - INFO - Thread-20 - 127.0.0.1 - - [13/Mar/2023 18:23:13] "[36mGET /static/css/details_styles.css HTTP/1.1[0m" 304 -
+2023-03-13 18:23:14,292 - INFO - Thread-21 - 127.0.0.1 - - [13/Mar/2023 18:23:14] "GET /item/edit/5 HTTP/1.1" 200 -
+2023-03-13 18:23:14,392 - INFO - Thread-22 - 127.0.0.1 - - [13/Mar/2023 18:23:14] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2023-03-13 18:23:14,399 - INFO - Thread-23 - 127.0.0.1 - - [13/Mar/2023 18:23:14] "[36mGET /static/css/edit.css HTTP/1.1[0m" 304 -
+2023-03-13 18:23:18,207 - INFO - Thread-24 - 127.0.0.1 - - [13/Mar/2023 18:23:18] "GET / HTTP/1.1" 200 -
+2023-03-13 18:23:18,322 - INFO - Thread-25 - 127.0.0.1 - - [13/Mar/2023 18:23:18] "[36mGET /static/css/styles.css HTTP/1.1[0m" 304 -
+2023-03-13 18:23:28,513 - INFO - MainThread -  * Detected change in 'c:\\Users\\ADMIN\\Desktop\\EPAM_Final_Project\\department-app\\migrations\\data_init.py', reloading
+2023-03-13 18:23:28,550 - INFO - MainThread -  * Restarting with stat
+2023-03-13 18:23:28,897 - WARNING - MainThread -  * Debugger is active!
+2023-03-13 18:23:28,900 - INFO - MainThread -  * Debugger PIN: 889-480-187
+2023-03-13 18:23:31,367 - INFO - MainThread -  * Detected change in 'c:\\Users\\ADMIN\\Desktop\\EPAM_Final_Project\\department-app\\migrations\\data_init.py', reloading
+2023-03-13 18:23:31,395 - INFO - MainThread -  * Restarting with stat
+2023-03-13 18:23:31,703 - WARNING - MainThread -  * Debugger is active!
+2023-03-13 18:23:31,707 - INFO - MainThread -  * Debugger PIN: 889-480-187
+2023-03-13 18:23:42,101 - INFO - MainThread -  * Detected change in 'c:\\Users\\ADMIN\\Desktop\\EPAM_Final_Project\\department-app\\migrations\\data_init.py', reloading
+2023-03-13 18:23:42,130 - INFO - MainThread -  * Restarting with stat
+2023-03-13 18:23:42,435 - WARNING - MainThread -  * Debugger is active!
+2023-03-13 18:23:42,439 - INFO - MainThread -  * Debugger PIN: 889-480-187
+2023-03-13 18:23:46,200 - INFO - MainThread -  * Detected change in 'c:\\Users\\ADMIN\\Desktop\\EPAM_Final_Project\\department-app\\migrations\\data_init.py', reloading
+2023-03-13 18:23:46,233 - INFO - MainThread -  * Restarting with stat
+2023-03-13 18:23:46,546 - WARNING - MainThread -  * Debugger is active!
+2023-03-13 18:23:46,550 - INFO - MainThread -  * Debugger PIN: 889-480-187
+2023-03-13 18:23:50,174 - INFO - MainThread -  * Detected change in 'c:\\Users\\ADMIN\\Desktop\\EPAM_Final_Project\\department-app\\migrations\\data_init.py', reloading
+2023-03-13 18:23:50,247 - INFO - MainThread -  * Restarting with stat
+2023-03-13 18:23:50,548 - WARNING - MainThread -  * Debugger is active!
+2023-03-13 18:23:50,552 - INFO - MainThread -  * Debugger PIN: 889-480-187
+2023-03-13 18:23:51,887 - INFO - MainThread -  * Detected change in 'c:\\Users\\ADMIN\\Desktop\\EPAM_Final_Project\\department-app\\migrations\\data_init.py', reloading
+2023-03-13 18:23:51,918 - INFO - MainThread -  * Restarting with stat
+2023-03-13 18:23:52,238 - WARNING - MainThread -  * Debugger is active!
+2023-03-13 18:23:52,242 - INFO - MainThread -  * Debugger PIN: 889-480-187
+2023-03-13 18:23:55,841 - INFO - MainThread -  * Detected change in 'c:\\Users\\ADMIN\\Desktop\\EPAM_Final_Project\\department-app\\migrations\\data_init.py', reloading
+2023-03-13 18:23:55,874 - INFO - MainThread -  * Restarting with stat
+2023-03-13 18:23:56,170 - WARNING - MainThread -  * Debugger is active!
+2023-03-13 18:23:56,174 - INFO - MainThread -  * Debugger PIN: 889-480-187
+2023-03-13 18:24:02,150 - INFO - MainThread -  * Detected change in 'c:\\Users\\ADMIN\\Desktop\\EPAM_Final_Project\\department-app\\migrations\\data_init.py', reloading
+2023-03-13 18:24:02,175 - INFO - MainThread -  * Restarting with stat
+2023-03-13 18:24:02,460 - WARNING - MainThread -  * Debugger is active!
+2023-03-13 18:24:02,464 - INFO - MainThread -  * Debugger PIN: 889-480-187
+2023-03-13 18:24:17,666 - INFO - MainThread -  * Detected change in 'c:\\Users\\ADMIN\\Desktop\\EPAM_Final_Project\\department-app\\migrations\\data_init.py', reloading
+2023-03-13 18:24:17,691 - INFO - MainThread -  * Restarting with stat
+2023-03-13 18:24:17,985 - WARNING - MainThread -  * Debugger is active!
+2023-03-13 18:24:17,988 - INFO - MainThread -  * Debugger PIN: 889-480-187
+2023-03-13 18:24:20,598 - INFO - MainThread -  * Detected change in 'c:\\Users\\ADMIN\\Desktop\\EPAM_Final_Project\\department-app\\migrations\\data_init.py', reloading
+2023-03-13 18:24:20,622 - INFO - MainThread -  * Restarting with stat
+2023-03-13 18:24:20,905 - WARNING - MainThread -  * Debugger is active!
+2023-03-13 18:24:20,908 - INFO - MainThread -  * Debugger PIN: 889-480-187
+2023-03-13 18:24:25,634 - INFO - MainThread -  * Detected change in 'c:\\Users\\ADMIN\\Desktop\\EPAM_Final_Project\\department-app\\migrations\\data_init.py', reloading
+2023-03-13 18:24:25,662 - INFO - MainThread -  * Restarting with stat
+2023-03-13 18:24:25,959 - WARNING - MainThread -  * Debugger is active!
+2023-03-13 18:24:25,963 - INFO - MainThread -  * Debugger PIN: 889-480-187
+2023-03-13 18:24:31,870 - INFO - MainThread -  * Detected change in 'c:\\Users\\ADMIN\\Desktop\\EPAM_Final_Project\\department-app\\migrations\\data_init.py', reloading
+2023-03-13 18:24:31,905 - INFO - MainThread -  * Restarting with stat
+2023-03-13 18:24:32,235 - WARNING - MainThread -  * Debugger is active!
+2023-03-13 18:24:32,239 - INFO - MainThread -  * Debugger PIN: 889-480-187
+2023-03-13 18:24:33,651 - INFO - MainThread -  * Detected change in 'c:\\Users\\ADMIN\\Desktop\\EPAM_Final_Project\\department-app\\migrations\\data_init.py', reloading
+2023-03-13 18:24:33,686 - INFO - MainThread -  * Restarting with stat
+2023-03-13 18:24:33,991 - WARNING - MainThread -  * Debugger is active!
+2023-03-13 18:24:33,994 - INFO - MainThread -  * Debugger PIN: 889-480-187
+2023-03-13 18:24:36,428 - INFO - MainThread -  * Detected change in 'c:\\Users\\ADMIN\\Desktop\\EPAM_Final_Project\\department-app\\migrations\\data_init.py', reloading
+2023-03-13 18:24:36,453 - INFO - MainThread -  * Restarting with stat
+2023-03-13 18:24:36,776 - WARNING - MainThread -  * Debugger is active!
+2023-03-13 18:24:36,779 - INFO - MainThread -  * Debugger PIN: 889-480-187
+2023-03-13 18:24:42,747 - INFO - MainThread -  * Detected change in 'c:\\Users\\ADMIN\\Desktop\\EPAM_Final_Project\\department-app\\migrations\\data_init.py', reloading
+2023-03-13 18:24:42,771 - INFO - MainThread -  * Restarting with stat
+2023-03-13 18:24:43,067 - WARNING - MainThread -  * Debugger is active!
+2023-03-13 18:24:43,070 - INFO - MainThread -  * Debugger PIN: 889-480-187
+2023-03-13 18:24:45,560 - INFO - MainThread -  * Detected change in 'c:\\Users\\ADMIN\\Desktop\\EPAM_Final_Project\\department-app\\migrations\\data_init.py', reloading
+2023-03-13 18:24:45,585 - INFO - MainThread -  * Restarting with stat
+2023-03-13 18:24:45,905 - WARNING - MainThread -  * Debugger is active!
+2023-03-13 18:24:45,908 - INFO - MainThread -  * Debugger PIN: 889-480-187
+2023-03-13 18:24:48,366 - INFO - MainThread -  * Detected change in 'c:\\Users\\ADMIN\\Desktop\\EPAM_Final_Project\\department-app\\migrations\\data_init.py', reloading
+2023-03-13 18:24:48,399 - INFO - MainThread -  * Restarting with stat
+2023-03-13 18:24:48,680 - WARNING - MainThread -  * Debugger is active!
+2023-03-13 18:24:48,683 - INFO - MainThread -  * Debugger PIN: 889-480-187
+2023-03-13 18:24:51,155 - INFO - MainThread -  * Detected change in 'c:\\Users\\ADMIN\\Desktop\\EPAM_Final_Project\\department-app\\migrations\\data_init.py', reloading
+2023-03-13 18:24:51,179 - INFO - MainThread -  * Restarting with stat
+2023-03-13 18:24:51,474 - WARNING - MainThread -  * Debugger is active!
+2023-03-13 18:24:51,478 - INFO - MainThread -  * Debugger PIN: 889-480-187
+2023-03-13 18:24:53,906 - INFO - MainThread -  * Detected change in 'c:\\Users\\ADMIN\\Desktop\\EPAM_Final_Project\\department-app\\migrations\\data_init.py', reloading
+2023-03-13 18:24:53,931 - INFO - MainThread -  * Restarting with stat
+2023-03-13 18:24:54,247 - WARNING - MainThread -  * Debugger is active!
+2023-03-13 18:24:54,251 - INFO - MainThread -  * Debugger PIN: 889-480-187
+2023-03-13 18:24:57,883 - INFO - MainThread -  * Detected change in 'c:\\Users\\ADMIN\\Desktop\\EPAM_Final_Project\\department-app\\migrations\\data_init.py', reloading
+2023-03-13 18:24:57,908 - INFO - MainThread -  * Restarting with stat
+2023-03-13 18:24:58,266 - WARNING - MainThread -  * Debugger is active!
+2023-03-13 18:24:58,270 - INFO - MainThread -  * Debugger PIN: 889-480-187
+2023-03-13 18:25:04,141 - INFO - MainThread -  * Detected change in 'c:\\Users\\ADMIN\\Desktop\\EPAM_Final_Project\\department-app\\migrations\\data_init.py', reloading
+2023-03-13 18:25:04,166 - INFO - MainThread -  * Restarting with stat
+2023-03-13 18:25:04,457 - WARNING - MainThread -  * Debugger is active!
+2023-03-13 18:25:04,460 - INFO - MainThread -  * Debugger PIN: 889-480-187
+2023-03-13 18:25:34,478 - INFO - MainThread -  * Detected change in 'c:\\Users\\ADMIN\\Desktop\\EPAM_Final_Project\\department-app\\migrations\\data_init.py', reloading
+2023-03-13 18:25:34,515 - INFO - MainThread -  * Restarting with stat
+2023-03-13 18:25:34,832 - WARNING - MainThread -  * Debugger is active!
+2023-03-13 18:25:34,836 - INFO - MainThread -  * Debugger PIN: 889-480-187
+2023-03-13 18:25:40,748 - INFO - MainThread -  * Detected change in 'c:\\Users\\ADMIN\\Desktop\\EPAM_Final_Project\\department-app\\migrations\\data_init.py', reloading
+2023-03-13 18:25:40,774 - INFO - MainThread -  * Restarting with stat
+2023-03-13 18:25:41,107 - WARNING - MainThread -  * Debugger is active!
+2023-03-13 18:25:41,111 - INFO - MainThread -  * Debugger PIN: 889-480-187
+2023-03-13 18:25:44,815 - INFO - MainThread -  * Detected change in 'c:\\Users\\ADMIN\\Desktop\\EPAM_Final_Project\\department-app\\migrations\\data_init.py', reloading
+2023-03-13 18:25:44,845 - INFO - MainThread -  * Restarting with stat
+2023-03-13 18:25:45,132 - WARNING - MainThread -  * Debugger is active!
+2023-03-13 18:25:45,136 - INFO - MainThread -  * Debugger PIN: 889-480-187
+2023-03-13 18:26:09,168 - INFO - MainThread -  * Detected change in 'c:\\Users\\ADMIN\\Desktop\\EPAM_Final_Project\\department-app\\migrations\\data_init.py', reloading
+2023-03-13 18:26:09,193 - INFO - MainThread -  * Restarting with stat
+2023-03-13 18:26:09,495 - WARNING - MainThread -  * Debugger is active!
+2023-03-13 18:26:09,499 - INFO - MainThread -  * Debugger PIN: 889-480-187
+2023-03-13 18:26:10,827 - INFO - MainThread -  * Detected change in 'c:\\Users\\ADMIN\\Desktop\\EPAM_Final_Project\\department-app\\migrations\\data_init.py', reloading
+2023-03-13 18:26:10,851 - INFO - MainThread -  * Restarting with stat
+2023-03-13 18:26:11,161 - WARNING - MainThread -  * Debugger is active!
+2023-03-13 18:26:11,164 - INFO - MainThread -  * Debugger PIN: 889-480-187
+2023-03-13 18:26:13,675 - INFO - MainThread -  * Detected change in 'c:\\Users\\ADMIN\\Desktop\\EPAM_Final_Project\\department-app\\migrations\\data_init.py', reloading
+2023-03-13 18:26:13,699 - INFO - MainThread -  * Restarting with stat
+2023-03-13 18:26:13,987 - WARNING - MainThread -  * Debugger is active!
+2023-03-13 18:26:13,991 - INFO - MainThread -  * Debugger PIN: 889-480-187
+2023-03-13 18:26:18,664 - INFO - MainThread -  * Detected change in 'c:\\Users\\ADMIN\\Desktop\\EPAM_Final_Project\\department-app\\migrations\\data_init.py', reloading
+2023-03-13 18:26:18,692 - INFO - MainThread -  * Restarting with stat
+2023-03-13 18:26:18,970 - WARNING - MainThread -  * Debugger is active!
+2023-03-13 18:26:18,973 - INFO - MainThread -  * Debugger PIN: 889-480-187
