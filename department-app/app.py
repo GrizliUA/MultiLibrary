@@ -52,7 +52,7 @@ def main():
         cur.close()
 
         return render_template('main.html', categories=categories_data)
-    except (Exception,): # pylint: disable=broad-except
+    except:
         return redirect("http://127.0.0.1:5000/error")
 
 
@@ -72,7 +72,7 @@ def items():
 
         return render_template('items.html', categories=categories_data, item_data=item_data,
                                item_category_id=item_category_id)
-    except (Exception,):
+    except:
         return redirect("http://127.0.0.1:5000/error")
 
 @app.route("/item/<string:id_data>" , methods=['GET', 'POST'])
@@ -91,7 +91,7 @@ def item(id_data):
             return redirect("http://127.0.0.1:5000/error")
 
         return render_template('item.html', categories=categories_data,items=item_data)
-    except (Exception,):
+    except:
         return redirect("http://127.0.0.1:5000/error")
 
 @app.route('/item/search', methods=['GET', 'POST'])
@@ -107,7 +107,7 @@ def item_search():
         cur.close()
 
         return render_template('search.html', categories=categories_data, writed_request=req)
-    except (Exception,): # pylint: disable=broad-except
+    except:
         return redirect("http://127.0.0.1:5000/error")
 
 @app.route('/item/searching', methods=['GET', 'POST'])
@@ -124,7 +124,7 @@ def item_searching():
         values_list = list(dict_res.values())
 
         return redirect(f"http://127.0.0.1:5000/item/{values_list[2]}")
-    except (Exception,):
+    except:
         return redirect("http://127.0.0.1:5000/item/search")
 
 @app.route("/item/edit/<string:id_data>" , methods=['GET', 'POST'])
@@ -144,7 +144,7 @@ def edit_item(id_data=None):
         cur.close()
 
         return render_template('edit_item.html', categories=categories_data)
-    except (Exception,):
+    except:
         return redirect("http://127.0.0.1:5000/error")
 
 
@@ -166,7 +166,7 @@ def update_item():
         cur.close()
 
         return redirect(f"http://127.0.0.1:5000/item/{item_id}")
-    except (Exception,):
+    except:
         return redirect("http://127.0.0.1:5000/error")
 
 
@@ -175,7 +175,7 @@ def error():
     """Error page function"""
     try:
         return render_template('error.html')
-    except (Exception,):
+    except:
         return response_400()
 
 @app.route('/item/add_item' , methods=['GET'])
@@ -188,7 +188,7 @@ def add_item_item():
         cur.close()
 
         return render_template('add_item.html', categories=categories_data)
-    except (Exception,):
+    except:
         return redirect("http://127.0.0.1:5000/error")
 
 
@@ -215,7 +215,7 @@ def adding_item():
         cur.close()
 
         return redirect(f"http://127.0.0.1:5000/item/{new_item_id[0]}")
-    except (Exception,):
+    except:
         cur.close()
         return redirect("http://127.0.0.1:5000/error")
 
@@ -224,7 +224,7 @@ def delete_item(id_data):
     """Delete page function"""
     try:
         return render_template('delete_item.html', id_data=id_data)
-    except (Exception,):
+    except:
         return redirect("http://127.0.0.1:5000/error")
 
 @app.route('/item/deleting/<string:id_data>' , methods=['GET', 'POST'])
@@ -236,7 +236,7 @@ def deleting_item(id_data):
         mysql.connection.commit()
         cur.close()
         return redirect("http://127.0.0.1:5000/")
-    except (Exception,):
+    except:
         cur.close()
         return render_template('error.html')
 
@@ -247,7 +247,7 @@ def selection_category():
     """Delete page function"""
     try:
         return render_template('selection.html')
-    except (Exception,):
+    except:
         return redirect("http://127.0.0.1:5000/error")
 
 @app.route('/category/create' , methods=['GET', 'POST'])
@@ -260,7 +260,7 @@ def add_category():
         cur.close()
 
         return render_template('add_category.html', categories=categories_data)
-    except (Exception,):
+    except:
         return redirect("http://127.0.0.1:5000/error")
 
 @app.route('/category/adding' , methods=['GET', 'POST'])
@@ -273,7 +273,7 @@ def adding_category():
         mysql.connection.commit()
         cur.close()
         return redirect("http://127.0.0.1:5000/")
-    except (Exception,):
+    except:
         return redirect("http://127.0.0.1:5000/error")
 
 
@@ -287,7 +287,7 @@ def edit_category():
         cur.close()
 
         return render_template('edit_category.html', categories=categories_data)
-    except (Exception,):
+    except:
         return redirect("http://127.0.0.1:5000/error")
 
 
@@ -307,7 +307,7 @@ def update_category():
         cur.close()
 
         return redirect("http://127.0.0.1:5000/")
-    except (Exception,):
+    except:
         return render_template('error.html')
 
 
@@ -321,7 +321,7 @@ def delete_category():
         cur.close()
 
         return render_template('delete_category.html', categories=categories_data)
-    except (Exception,):
+    except:
         return redirect("http://127.0.0.1:5000/error")
 
 
@@ -332,7 +332,7 @@ def delete_confirm_category():
         category_id = int(request.form["category-id"])
 
         return render_template('delete_confirm_category.html', delete_id=category_id)
-    except (Exception,):
+    except:
         return redirect("http://127.0.0.1:5000/error")
 
 
@@ -346,7 +346,7 @@ def deliting_category(delete_id=None):
         mysql.connection.commit()
         cur.close()
         return redirect("http://127.0.0.1:5000/")
-    except (Exception,):
+    except:
         cur.close()
         return redirect("http://127.0.0.1:5000/error")
 
@@ -387,7 +387,7 @@ class ApiCategoryCreate(Resource):
 
             response = {"category_id": categories_data[0], "category_label": categories_data[1]}
             return response_201(response)
-        except (Exception,):
+        except:
             try:
                 cur = mysql.connection.cursor()
                 cur.execute(f"SELECT * FROM categories WHERE category_label = '{category_label}'")
@@ -396,7 +396,7 @@ class ApiCategoryCreate(Resource):
 
                 response = {"category_id": categories_data[0], "category_label": categories_data[1]}
                 return response_208(response)
-            except (Exception,):
+            except:
                 return response_400()
 api.add_resource(ApiCategoryCreate, '/api/category/create/<string:category_label>')
 
@@ -407,7 +407,7 @@ class ApiCategoryRead(Resource):
         """API Category Read"""
         try:
             category_request = int(category_request)
-        except (Exception,):
+        except:
             pass
         try:
             cur = mysql.connection.cursor()
@@ -420,7 +420,7 @@ class ApiCategoryRead(Resource):
 
             response = {"category_id": categories_data[0], "category_label": categories_data[1]}
             return response_200(response)
-        except (Exception,):
+        except:
             return response_400()
 api.add_resource(ApiCategoryRead, '/api/category/read/<string:category_request>')
 
@@ -431,7 +431,7 @@ class ApiCategoryUpdate(Resource):
         """API Category Update"""
         try:
             category_request = int(category_request)
-        except (Exception,):
+        except:
             pass
         try:
             category_label = str(request.args["category_label"])
@@ -453,7 +453,7 @@ class ApiCategoryUpdate(Resource):
 
             response = {"category_id": categories_data[0], "category_label": categories_data[1]}
             return response_202(response)
-        except (Exception,):
+        except:
             return response_400()
 api.add_resource(ApiCategoryUpdate, '/api/category/update/<string:category_request>')
 
@@ -464,7 +464,7 @@ class ApiCategoryDelete(Resource):
         """API Category Delete"""
         try:
             category_request = int(category_request)
-        except (Exception,):
+        except:
             pass
         try:
             cur = mysql.connection.cursor()
@@ -478,7 +478,7 @@ class ApiCategoryDelete(Resource):
             cur.close()
 
             return response_202()
-        except (Exception,):
+        except:
             return response_400()
 api.add_resource(ApiCategoryDelete, '/api/category/delete/<string:category_request>')
 
@@ -515,7 +515,7 @@ class ApiItemCreate(Resource):
                         "item_date": item_data[6],
                         "item_value": item_data[7]}
             return response_201(response)
-        except (Exception,):
+        except:
             return response_400()
 api.add_resource(ApiItemCreate, '/api/item/create/')
 
@@ -526,7 +526,7 @@ class ApiItemRead(Resource):
         """API Item Read"""
         try:
             item_request = int(item_request)
-        except (Exception,):
+        except:
             pass
         try:
             cur = mysql.connection.cursor()
@@ -548,7 +548,7 @@ class ApiItemRead(Resource):
                         "item_date": item_data[6],
                         "item_value": item_data[7]}
             return response_200(response)
-        except (Exception,):
+        except:
             return response_400()
 api.add_resource(ApiItemRead, '/api/item/read/<string:item_request>')
 
@@ -559,7 +559,7 @@ class ApiItemUpdate(Resource):
         """API Item Update"""
         try:
             item_request = int(item_request)
-        except (Exception,):
+        except:
             pass
         try:
             item_label = request.args['item_label']
@@ -590,7 +590,7 @@ class ApiItemUpdate(Resource):
                         "item_value": item_data[7]}
             cur.close()
             return response_200(response)
-        except (Exception,):
+        except:
             return response_400()
 api.add_resource(ApiItemUpdate, '/api/item/update/<string:item_request>')
 
@@ -601,7 +601,7 @@ class ApiItemDelete(Resource):
         """API Item Delete"""
         try:
             item_request = int(item_request)
-        except (Exception,):
+        except:
             pass
         try:
             cur = mysql.connection.cursor()
@@ -615,7 +615,7 @@ class ApiItemDelete(Resource):
 
             mysql.connection.commit()
             return response_202()
-        except (Exception,):
+        except:
             return response_400()
 api.add_resource(ApiItemDelete, '/api/item/delete/<string:item_request>')
 
@@ -653,7 +653,7 @@ class ApiItemSearch(Resource):
                         "item_value": item_data[7]}
 
             return response_200(response)
-        except (Exception,):
+        except:
             return response_400()
 api.add_resource(ApiItemSearch, '/api/item/search/')
 
