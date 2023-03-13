@@ -346,6 +346,7 @@ def deliting_category(delete_id=None):
 class ApiCategoryCreate(Resource):
     """Category Create API realization"""
     def post(self,category_label):
+        # API Category Create
         try:
             cur = mysql.connection.cursor()
             cur.execute(f"INSERT INTO categories (category_label) VALUES ('{category_label}');")
@@ -374,6 +375,7 @@ api.add_resource(ApiCategoryCreate, '/api/category/create/<string:category_label
 class ApiCategoryRead(Resource):
     """Category Read API realization"""
     def get(self,category_request):
+        # API Category Read
         try:
             category_request = int(category_request)
         except TypeError:
@@ -397,6 +399,7 @@ api.add_resource(ApiCategoryRead, '/api/category/read/<string:category_request>'
 class ApiCategoryUpdate(Resource):
     """Category Update API realization"""
     def put(self,category_request):
+        # API Category Update
         try:
             category_request = int(category_request)
         except TypeError:
@@ -429,6 +432,7 @@ api.add_resource(ApiCategoryUpdate, '/api/category/update/<string:category_reque
 class ApiCategoryDelete(Resource):
     """Category Delete API realization"""
     def delete(self,category_request):
+        # API Category Delete
         try:
             category_request = int(category_request)
         except TypeError:
@@ -454,6 +458,7 @@ api.add_resource(ApiCategoryDelete, '/api/category/delete/<string:category_reque
 class ApiItemCreate(Resource):
     """Item Create API realization"""
     def post(self):
+        # API Item Create
         try:
             item_label = request.args['item_label']
 
@@ -489,6 +494,7 @@ api.add_resource(ApiItemCreate, '/api/item/create/')
 class ApiItemRead(Resource):
     """Item Read API realization"""
     def get(self,item_request):
+        # API Item Read
         try:
             item_request = int(item_request)
         except TypeError:
@@ -521,6 +527,7 @@ api.add_resource(ApiItemRead, '/api/item/read/<string:item_request>')
 class ApiItemUpdate(Resource):
     """Item Update API realization"""
     def put(self,item_request):
+        # API Item Update
         try:
             item_request = int(item_request)
         except TypeError:
@@ -562,6 +569,7 @@ api.add_resource(ApiItemUpdate, '/api/item/update/<string:item_request>')
 class ApiItemDelete(Resource):
     """Item Delete API realization"""
     def delete(self,item_request):
+        # API Item Delete
         try:
             item_request = int(item_request)
         except TypeError:
