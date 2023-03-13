@@ -13,9 +13,15 @@
             <div class="header-btn-divs">
                 <form class="form-inline" method="POST" action="{{url_for('items')}}">
                     <select name="item_category_id" class="select-menu">
-                        {% for row in categories %}
-                            <option value="{{row.0}}">{{row.1}}</option>
-                        {% endfor  %}
+                        {% for category in item_category_id %}
+                            {% for row in categories %}
+                                {% if category|int == row.0 %}
+                                    <option value="{{row.0}}" selected>{{row.1}}</option>
+                                {% else %}
+                                    <option value="{{row.0}}">{{row.1}}</option>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
                     </select>
                     <button type="submit" class="look-btn">Go</button>
                 </form>
@@ -27,12 +33,12 @@
             </div>
         </nav>
         <a class="logo" href="http://127.0.0.1:5000/">MultiLib</a>
-        <form class="search-form" action="http://127.0.0.1:5000/search" role="form-search" id="form">
-            <input class="search-input" type="input-search" id="query" name="q"
-                placeholder="Find something"
-                aria-label="Search through site content">
-            <button class="search-button">
-            <svg viewBox="0 0 1024 1024"><path class="search-svg" d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z"></path></svg>
+        <form class="search-form" method="post" action="http://127.0.0.1:5000/item/search">
+            <input class="search-input" type="input-search" id="item_label" name="item_label" placeholder="Find something">
+            <button type="submit" class="search-button" >
+                <svg viewBox="0 0 1024 1024">
+                    <path class="search-svg" d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z"></path>
+                </svg>
             </button>   
         </form>
     </header>
@@ -41,14 +47,18 @@
             <div class="main-container">
                 {% set score = [] %}
                 {% set iterations = [] %}
-                {% for row in items %}
+                {% for row in item_data %}
                     {% if score.append(row.7|float) %} {% endif %}
                     {% if iterations.append(1) %} {% endif %}
                     <section class="main-container-section">
                         <ul class="main-row">
                             <li class="main-poster">
                                 <a href="http://127.0.0.1:5000/item/{{row.0}}">
-                                    <img src="{{row.5}}" alt="poster" class="poster-img-link">
+                                    {% if row.5|length > 0%}
+                                        <img src="{{row.5}}" alt="poster" class="poster-img-link">
+                                    {% else %}
+                                        <img src="/static/images/no_image.png" alt="poster" class="poster-img-link">
+                                    {% endif %}
                                 </a>
                                 <a class="poster-text-link" href="http://127.0.0.1:5000/item/{{row.0}}">
                                     {{row.2}}

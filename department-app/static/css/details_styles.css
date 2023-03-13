@@ -80,3 +80,7 @@
 .add-info p{
     font-size: 20px;
 }
+
+.alternative-video-img {
+    object-fit: cover;
+}
