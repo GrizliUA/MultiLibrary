@@ -11,35 +11,33 @@ mydb = mysql.connector.connect(
 cursor = mydb.cursor()
 
 
-cursor.execute( "CREATE TABLE IF NOT EXISTS Categories("
-                "category_id INT(11) AUTO_INCREMENT,"
-                "category_label VARCHAR(40) NOT NULL UNIQUE,"
-                "CONSTRAINT PK_Category PRIMARY KEY (category_id));")
+cursor.execute("CREATE TABLE IF NOT EXISTS Categories("
+            "category_id INT(11) AUTO_INCREMENT,"
+            "category_label VARCHAR(40) NOT NULL,"
+            "CONSTRAINT PK_Category PRIMARY KEY (category_id));")
 mydb.commit()
 
 
-cursor.execute( "CREATE TABLE IF NOT EXISTS Items ("
-                "item_id INT(11) AUTO_INCREMENT,"
-                "item_category_id INT(11) NOT NULL,"
-                "item_label VARCHAR(100) NOT NULL UNIQUE,"
-                "item_info TEXT,"
-                "item_video_link VARCHAR(255),"
-                "item_photo_link VARCHAR(255),"
-                "item_date year,"
-                "item_value VARCHAR(255),"
-                "CONSTRAINT PK_Item PRIMARY KEY(item_id),"
-                "FOREIGN KEY (item_category_id) REFERENCES Categories(category_id)"
-                "ON UPDATE CASCADE ON DELETE CASCADE);")
+cursor.execute("CREATE TABLE IF NOT EXISTS Items ("
+            "item_id INT(11) AUTO_INCREMENT,"
+            "item_category_id INT(11) NOT NULL,"
+            "item_label VARCHAR(100) NOT NULL,"
+            "item_info TEXT,"
+            "item_video_link VARCHAR(255),"
+            "item_photo_link VARCHAR(255),"
+            "CONSTRAINT PK_Item PRIMARY KEY(item_id),"
+            "FOREIGN KEY (item_category_id) REFERENCES Categories(category_id)"
+            "ON UPDATE CASCADE ON DELETE CASCADE);")
 mydb.commit()
 
 
-cursor.execute( "INSERT INTO Categories (category_label) VALUES"
-                "('Movies'),"
-                "('Books'),"
-                "('Details'),"
-                "('TESTTT'),"
-                "('DetaTERERERils'),"
-                "('DetFDFDFDFDDails');")
+cursor.execute("INSERT INTO Categories (category_label) VALUES"
+            "('Movies'),"
+            "('Books'),"
+            "('Details'),"
+            "('TESTTT'),"
+            "('DetaTERERERils'),"
+            "('DetFDFDFDFDDails');")
 mydb.commit()
 cursor.execute(
 "INSERT INTO Items (item_category_id,item_label,item_info,item_video_link,item_photo_link) VALUES"
