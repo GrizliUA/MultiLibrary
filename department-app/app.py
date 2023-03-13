@@ -2,7 +2,6 @@
 from flask_mysqldb import MySQL
 from flask import Flask, render_template, request, redirect, make_response
 from flask_restful import Resource, Api
-import datetime
 
 
 app = Flask(__name__)
@@ -25,8 +24,6 @@ def response_208(response='Already Reported'):
     return make_response(response,208)
 def response_400(response='Bad Request'):
     return make_response(response,400)
-def response_403(response='Unauthorized'):
-    return make_response(response,403)
 
 def check_item_null(db_item,rq_item):
     if rq_item == '':
@@ -41,7 +38,7 @@ def check_item_null(db_item,rq_item):
 def main():
     """Main page function"""
     cur = mysql.connection.cursor()
-    cur.execute("SELECT  * FROM categories")
+    cur.execute("SELECT * FROM categories")
     data = cur.fetchall()
     cur.close()
 
@@ -52,35 +49,41 @@ def main():
 def items():
     """Items page function"""
     cur = mysql.connection.cursor()
-    cur.execute("SELECT  * FROM categories")
+    cur.execute("SELECT * FROM categories")
     categories_data = cur.fetchall()
 
-    cat_id = request.form.get("item-choice")
-    cur.execute(f"SELECT  * FROM items WHERE item_category_id = {cat_id}")
-    data_items = cur.fetchall()
+    
+    print(categories_data)
+    item_category_id = request.form.get("item_category_id")
+    print(item_category_id)
+    cur.execute(f"SELECT * FROM items WHERE item_category_id = {item_category_id}")
+    item_data = cur.fetchall()
     cur.close()
 
 
-    return render_template('items.html', categories=categories_data,items=data_items)
+    return render_template('items.html', categories=categories_data,items=item_data)
 
 @app.route("/item/<string:id_data>" , methods=['GET', 'POST'])
 def item(id_data):
     """Item page function"""
     cur = mysql.connection.cursor()
-    cur.execute("SELECT  * FROM categories")
+    cur.execute("SELECT * FROM categories")
     categories_data = cur.fetchall()
 
-    cur.execute(f"SELECT  * FROM items WHERE item_id = {id_data}")
-    data_item = cur.fetchall()
+    cur.execute(f"SELECT * FROM items WHERE item_id = {id_data}")
+    item_data = cur.fetchall()
     cur.close()
 
-    return render_template('item.html', categories=categories_data,items=data_item )
+    if not len(item_data):
+        return redirect(f"http://127.0.0.1:5000/error")
+
+    return render_template('item.html', categories=categories_data,items=item_data)
 
 @app.route('/search')
 def search():
     """Items page function"""
     cur = mysql.connection.cursor()
-    cur.execute("SELECT  * FROM categories")
+    cur.execute("SELECT * FROM categories")
     categories_data = cur.fetchall()
 
 
@@ -91,11 +94,11 @@ def search():
 def edit_item(id_data=None):
     """Edit page function"""
     cur = mysql.connection.cursor()
-    cur.execute("SELECT  * FROM categories")
+    cur.execute("SELECT * FROM categories")
     categories_data = cur.fetchall()
 
     if id_data is not None:
-        cur.execute(f"SELECT  * FROM items WHERE item_id = {id_data}")
+        cur.execute(f"SELECT * FROM items WHERE item_id = {id_data}")
         data_item = cur.fetchall()
         cur.close()
         return render_template('edit_item.html', categories=categories_data,items=data_item)
@@ -108,19 +111,20 @@ def edit_item(id_data=None):
 @app.route('/item/update' , methods=['GET', 'POST'])
 def update_item():
     """Edit page function"""
-    item_id = int(request.form["item-id"])
-    item_category = int(request.form["item-category"])
-    item_info = str(request.form["item-info"])
-    item_label = str(request.form["item-label"])
-    item_photo_link = str(request.form["item-photo-link"])
-    item_video_link = str(request.form["item-video-link"])
-    cur = mysql.connection.cursor()
-    cur.execute(f"SELECT category_id FROM categories WHERE category_id = {item_category};")
-    categories_data = cur.fetchone()
-    
     try:
+        item_id = int(request.form["item_id"])
+        item_category_id = int(request.form["item_category_id"])
+        item_update = ''
+        for key, value in request.form.items():
+            item_update += f"{key} = '{value}' , "
+        item_update = item_update[15+len(str(item_id)):-3]
+
+        cur = mysql.connection.cursor()
+        cur.execute(f"SELECT category_id FROM categories WHERE category_id = {item_category_id};")
+        categories_data = cur.fetchone()
+    
         int(categories_data[0])
-        cur.execute(f"UPDATE items SET item_category_id = {item_category}, item_label = '{item_label}', item_info = '{item_info}', item_video_link = '{item_video_link}', item_photo_link = '{item_photo_link}' WHERE item_id = {item_id};")
+        cur.execute(f"UPDATE items SET {item_update} WHERE item_id = {item_id};")
         mysql.connection.commit()
         cur.close()
         return redirect(f"http://127.0.0.1:5000/item/{item_id}")
@@ -137,7 +141,7 @@ def error():
 def add_item_item():
     """Edit page function"""
     cur = mysql.connection.cursor()
-    cur.execute("SELECT  * FROM categories")
+    cur.execute("SELECT * FROM categories")
     categories_data = cur.fetchall()
     cur.close()
 
@@ -147,19 +151,22 @@ def add_item_item():
 @app.route('/item/adding' , methods=['GET', 'POST'])
 def adding_item():
     """Edit page function"""
-    item_category_id = int(request.form["item-choice"])
-    item_label = str(request.form["item-label"])
-    item_info = str(request.form["item-info"])
-    item_video_link = str(request.form["item-video-link"])
-    item_photo_link = str(request.form["item-photo-link"])
+    item_category_id = int(request.form["item_category_id"])
+    item_label = str(request.form["item_label"])
+    item_info = str(request.form["item_info"])
+    item_video_link = str(request.form["item_video_link"])
+    item_photo_link = str(request.form["item_photo_link"])
+    item_date = str(request.form["item_date"])
+    item_value = str(request.form["item_value"])
     cur = mysql.connection.cursor()
     cur.execute(f"SELECT category_id FROM categories WHERE category_id = {item_category_id};")
     categories_data = cur.fetchone()
     try:
         int(categories_data[0])
         cur.execute(f"INSERT INTO Items (item_category_id,item_label,item_info,item_video_link,"
-                    f"item_photo_link) VALUES ({item_category_id},'{item_label}','{item_info}',"
-                    f"'{item_video_link}','{item_photo_link}');")
+                    f"item_photo_link,item_date,item_value) VALUES ({item_category_id},"
+                    f"'{item_label}','{item_info}','{item_video_link}','{item_photo_link}',"
+                    f"'{item_date}','{item_value}');")
         mysql.connection.commit()
         cur.execute(f"SELECT item_id FROM items WHERE item_label = '{item_label}';")
         new_item_id = cur.fetchone()
@@ -341,7 +348,7 @@ class api_category_read(Resource):
             response = {"category_id": categories_data[0], "category_label": categories_data[1]}
             return response_200(response)
         except:
-                return response_400()
+            return response_400()
 api.add_resource(api_category_read, '/api/category/read/<string:category_request>')
 
 class api_category_update(Resource):

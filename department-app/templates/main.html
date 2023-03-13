@@ -12,7 +12,7 @@
         <nav class="header-nav">
             <div class="header-btn-divs">
                 <form class="form-inline" method="POST" action="{{url_for('items')}}">
-                    <select name="item-choice" class="select-menu">
+                    <select name="item_category_id" class="select-menu">
                         {% for row in categories %}
                             <option value="{{row.0}}">{{row.1}}</option>
                         {% endfor  %}

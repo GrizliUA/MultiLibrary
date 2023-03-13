@@ -13,7 +13,7 @@
         <nav class="header-nav">
             <div class="header-btn-divs">
                 <form class="form-inline" method="POST" action="{{url_for('items')}}">
-                    <select name="item-choice" class="select-menu">
+                    <select name="item_category_id" class="select-menu">
                         {% for item in items %}
                             {% for row in categories %}
                                 {% if item.1 == row.0 %}
@@ -60,13 +60,15 @@
                             <button type="submit" class="btn__list">Delete</button>
                         </div>
                     </form>
-
+                    <div class="add-info">
+                        <p class="info-text">📅{{item.6}}</p>
+                        <p class="info-text">⭐{{item.7}}</p>
+                    </div>
                 </div>
                 <div class="info-container">
                     <iframe width="640" height="360" src="{{item.4}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     <h5 class="info-label">Information</h5>
-                    <p class="info-text">{{item.3}}
-                    </p>
+                    <p class="info-text">{{item.3}}</p>
                 </div>
             </div>
         </section>
