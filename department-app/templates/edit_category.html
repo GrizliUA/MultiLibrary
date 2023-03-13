@@ -13,7 +13,7 @@
         <nav class="header-nav">
             <div class="header-btn-divs">
                 <form class="form-inline" method="POST" action="{{url_for('items')}}">
-                    <select name="category-choice" class="select-menu">
+                    <select name="item_category_id" class="select-menu">
                         {% for row in categories %}
                             <option value="{{row.0}}">{{row.1}}</option>
                         {% endfor  %}
@@ -28,40 +28,40 @@
             </div>
         </nav>
         <a class="logo" href="http://127.0.0.1:5000/">MultiLib</a>
-        <form class="search-form" action="http://127.0.0.1:5000/search" role="form-search" id="form">
-            <input class="search-input" type="input-search" id="query" name="q"
-                placeholder="Find something"
-                aria-label="Search through site content">
-            <button class="search-button">
-            <svg viewBox="0 0 1024 1024"><path class="search-svg" d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z"></path></svg>
+        <form class="search-form" method="post" action="http://127.0.0.1:5000/item/search">
+            <input class="search-input" type="input-search" id="item_label" name="item_label" placeholder="Find something">
+            <button type="submit" class="search-button" >
+                <svg viewBox="0 0 1024 1024">
+                    <path class="search-svg" d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z"></path>
+                </svg>
             </button>   
         </form>
     </header>
     <main>
         <main>
             <div class="main-container">
-                    <form class="edit-form" method="POST" action="http://127.0.0.1:5000/category/update">
-                        <div class="inner-form-container">
-                            <div class="form-small-inputs">
-                                <div class="small-form-div">
-                                    <label>Old Name:</label>
-                                    <select name="category-id" class="category-select">
-                                        {% for row in categories %}
-                                            <option value="{{row.0}}">{{row.1}}</option>
-                                        {% endfor  %}
-                                    </select>
-                                </div>
-                                <div class="small-form-div">
-                                    <label>New Name:</label>
-                                    <input class="category-select" type="text" id="category-label" name="category-label" value="" required>
-                                </div>                                
+                <form class="edit-form" method="POST" action="http://127.0.0.1:5000/category/update">
+                    <div class="inner-form-container">
+                        <div class="form-small-inputs">
+                            <div class="small-form-div">
+                                <label>Old Name:</label>
+                                <select name="category-id" class="category-select">
+                                    {% for row in categories %}
+                                        <option value="{{row.0}}">{{row.1}}</option>
+                                    {% endfor  %}
+                                </select>
                             </div>
-                            <div class="form-buttons">
-                                <button type="submit" class="look-btn edit-category-btn">Apply</button>
-                                <button type="reset" class="look-btn edit-category-btn">Reset</button>
-                            </div>
+                            <div class="small-form-div">
+                                <label>New Name:</label>
+                                <input class="category-select" type="text" id="category-label" name="category-label" value="" required>
+                            </div>                                
                         </div>
-                    </form>
+                        <div class="form-buttons">
+                            <button type="submit" class="look-btn edit-category-btn">Apply</button>
+                            <button type="reset" class="look-btn edit-category-btn">Reset</button>
+                        </div>
+                    </div>
+                </form>
             </div>
     </main>
 </body>

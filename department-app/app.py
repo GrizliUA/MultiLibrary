@@ -2,6 +2,11 @@
 from flask_mysqldb import MySQL
 from flask import Flask, render_template, request, redirect, make_response
 from flask_restful import Resource, Api
+from urllib.request import urlopen
+import json
+import logging
+from logging.handlers import RotatingFileHandler
+
 
 
 app = Flask(__name__)
@@ -30,20 +35,22 @@ def response_208(response='Already Reported'):
 def response_400(response='Bad Request'):
     """Returns response with code 400"""
     return make_response(response,400)
+def response_404(response='Not Found'):
+    """Returns response with code 404"""
+    return make_response(response,404)
 
 
 @app.route('/')
-@app.route('/main')
 def main():
     """Main page function"""
     try:
         cur = mysql.connection.cursor()
         cur.execute("SELECT * FROM categories")
-        data = cur.fetchall()
+        categories_data = cur.fetchall()
         cur.close()
 
-        return render_template('main.html', categories=data )
-    except ValueError:
+        return render_template('main.html', categories=categories_data)
+    except:
         return redirect("http://127.0.0.1:5000/error")
 
 
@@ -55,14 +62,14 @@ def items():
         cur.execute("SELECT * FROM categories")
         categories_data = cur.fetchall()
 
-        item_category_id = request.form.get("item_category_id")
+        item_category_id = request.form["item_category_id"]
         cur.execute(f"SELECT * FROM items WHERE item_category_id = {item_category_id}")
 
         item_data = cur.fetchall()
         cur.close()
 
-        return render_template('items.html', categories=categories_data,items=item_data)
-    except ValueError:
+        return render_template('items.html', categories=categories_data, item_data=item_data, item_category_id=item_category_id)
+    except:
         return redirect("http://127.0.0.1:5000/error")
 
 @app.route("/item/<string:id_data>" , methods=['GET', 'POST'])
@@ -81,22 +88,41 @@ def item(id_data):
             return redirect("http://127.0.0.1:5000/error")
 
         return render_template('item.html', categories=categories_data,items=item_data)
-    except ValueError:
+    except:
         return redirect("http://127.0.0.1:5000/error")
 
-@app.route('/search')
-def search():
-    """Items page function"""
+@app.route('/item/search', methods=['GET', 'POST'])
+def item_search():
+    """Search page function"""
+    req=''
+    if request.method == 'POST':
+        req = request.form["item_label"]
     try:
         cur = mysql.connection.cursor()
         cur.execute("SELECT * FROM categories")
         categories_data = cur.fetchall()
         cur.close()
 
-        return render_template('search.html', categories=categories_data)
-    except ValueError:
+        return render_template('search.html', categories=categories_data, writed_request=req)
+    except:
         return redirect("http://127.0.0.1:5000/error")
 
+@app.route('/item/searching', methods=['GET', 'POST'])
+def item_searching():
+    """Search page function"""
+    try:
+        item_label = '?item_label=' + request.form["item_label"]
+        item_date = '&item_date=' + request.form["item_date"]
+        url = f"http://127.0.0.1:5000/api/item/search/{item_label+item_date}"
+
+        with urlopen(url) as req:
+            res = req.read()
+        dict_res = json.loads(res)
+        values_list = list(dict_res.values())
+
+        return redirect(f"http://127.0.0.1:5000/item/{values_list[2]}")
+    except:
+        return redirect("http://127.0.0.1:5000/item/search")
 
 @app.route("/item/edit/<string:id_data>" , methods=['GET', 'POST'])
 def edit_item(id_data=None):
@@ -115,7 +141,7 @@ def edit_item(id_data=None):
         cur.close()
 
         return render_template('edit_item.html', categories=categories_data)
-    except ValueError:
+    except:
         return redirect("http://127.0.0.1:5000/error")
 
 
@@ -137,7 +163,7 @@ def update_item():
         cur.close()
 
         return redirect(f"http://127.0.0.1:5000/item/{item_id}")
-    except ValueError:
+    except:
         return redirect("http://127.0.0.1:5000/error")
 
 
@@ -146,7 +172,7 @@ def error():
     """Error page function"""
     try:
         return render_template('error.html')
-    except ValueError:
+    except:
         return response_400()
 
 @app.route('/item/add_item' , methods=['GET'])
@@ -159,7 +185,7 @@ def add_item_item():
         cur.close()
 
         return render_template('add_item.html', categories=categories_data)
-    except ValueError:
+    except:
         return redirect("http://127.0.0.1:5000/error")
 
 
@@ -186,7 +212,7 @@ def adding_item():
         cur.close()
 
         return redirect(f"http://127.0.0.1:5000/item/{new_item_id[0]}")
-    except ValueError:
+    except:
         cur.close()
         return redirect("http://127.0.0.1:5000/error")
 
@@ -195,7 +221,7 @@ def delete_item(id_data):
     """Delete page function"""
     try:
         return render_template('delete_item.html', id_data=id_data)
-    except ValueError:
+    except:
         return redirect("http://127.0.0.1:5000/error")
 
 @app.route('/item/deleting/<string:id_data>' , methods=['GET', 'POST'])
@@ -207,7 +233,7 @@ def deleting_item(id_data):
         mysql.connection.commit()
         cur.close()
         return redirect("http://127.0.0.1:5000/")
-    except ValueError:
+    except:
         cur.close()
         return render_template('error.html')
 
@@ -218,7 +244,7 @@ def selection_category():
     """Delete page function"""
     try:
         return render_template('selection.html')
-    except ValueError:
+    except:
         return redirect("http://127.0.0.1:5000/error")
 
 @app.route('/category/create' , methods=['GET', 'POST'])
@@ -231,7 +257,7 @@ def add_category():
         cur.close()
 
         return render_template('add_category.html', categories=categories_data)
-    except ValueError:
+    except:
         return redirect("http://127.0.0.1:5000/error")
 
 @app.route('/category/adding' , methods=['GET', 'POST'])
@@ -244,7 +270,7 @@ def adding_category():
         mysql.connection.commit()
         cur.close()
         return redirect("http://127.0.0.1:5000/")
-    except ValueError:
+    except:
         return redirect("http://127.0.0.1:5000/error")
 
 
@@ -258,7 +284,7 @@ def edit_category():
         cur.close()
 
         return render_template('edit_category.html', categories=categories_data)
-    except ValueError:
+    except:
         return redirect("http://127.0.0.1:5000/error")
 
 
@@ -278,7 +304,7 @@ def update_category():
         cur.close()
 
         return redirect("http://127.0.0.1:5000/")
-    except ValueError:
+    except:
         return render_template('error.html')
 
 
@@ -292,7 +318,7 @@ def delete_category():
         cur.close()
 
         return render_template('delete_category.html', categories=categories_data)
-    except ValueError:
+    except:
         return redirect("http://127.0.0.1:5000/error")
 
 
@@ -303,7 +329,7 @@ def delete_confirm_category():
         category_id = int(request.form["category-id"])
 
         return render_template('delete_confirm_category.html', delete_id=category_id)
-    except ValueError:
+    except:
         return redirect("http://127.0.0.1:5000/error")
 
 
@@ -317,7 +343,7 @@ def deliting_category(delete_id=None):
         mysql.connection.commit()
         cur.close()
         return redirect("http://127.0.0.1:5000/")
-    except ValueError:
+    except:
         cur.close()
         return redirect("http://127.0.0.1:5000/error")
 
@@ -344,7 +370,7 @@ def deliting_category(delete_id=None):
 
 
 class ApiCategoryCreate(Resource):
-    """Category Create API realization"""
+    """Category API Create realization"""
     def post(self,category_label):
         """API Category Create"""
         try:
@@ -358,7 +384,7 @@ class ApiCategoryCreate(Resource):
 
             response = {"category_id": categories_data[0], "category_label": categories_data[1]}
             return response_201(response)
-        except ValueError:
+        except:
             try:
                 cur = mysql.connection.cursor()
                 cur.execute(f"SELECT * FROM categories WHERE category_label = '{category_label}'")
@@ -367,13 +393,13 @@ class ApiCategoryCreate(Resource):
 
                 response = {"category_id": categories_data[0], "category_label": categories_data[1]}
                 return response_208(response)
-            except ValueError:
+            except:
                 return response_400()
 api.add_resource(ApiCategoryCreate, '/api/category/create/<string:category_label>')
 
 
 class ApiCategoryRead(Resource):
-    """Category Read API realization"""
+    """Category API Read realization"""
     def get(self,category_request):
         """API Category Read"""
         try:
@@ -391,13 +417,13 @@ class ApiCategoryRead(Resource):
 
             response = {"category_id": categories_data[0], "category_label": categories_data[1]}
             return response_200(response)
-        except ValueError:
+        except:
             return response_400()
 api.add_resource(ApiCategoryRead, '/api/category/read/<string:category_request>')
 
 
 class ApiCategoryUpdate(Resource):
-    """Category Update API realization"""
+    """Category API Update realization"""
     def put(self,category_request):
         """API Category Update"""
         try:
@@ -424,13 +450,13 @@ class ApiCategoryUpdate(Resource):
 
             response = {"category_id": categories_data[0], "category_label": categories_data[1]}
             return response_202(response)
-        except ValueError:
+        except:
             return response_400()
 api.add_resource(ApiCategoryUpdate, '/api/category/update/<string:category_request>')
 
 
 class ApiCategoryDelete(Resource):
-    """Category Delete API realization"""
+    """Category API Delete realization"""
     def delete(self,category_request):
         """API Category Delete"""
         try:
@@ -449,14 +475,14 @@ class ApiCategoryDelete(Resource):
             cur.close()
 
             return response_202()
-        except ValueError:
+        except:
             return response_400()
 api.add_resource(ApiCategoryDelete, '/api/category/delete/<string:category_request>')
 
 
 
 class ApiItemCreate(Resource):
-    """Item Create API realization"""
+    """Item API Create realization"""
     def post(self):
         """API Item Create"""
         try:
@@ -486,13 +512,13 @@ class ApiItemCreate(Resource):
                         "item_date": item_data[6],
                         "item_value": item_data[7]}
             return response_201(response)
-        except ValueError:
+        except:
             return response_400()
 api.add_resource(ApiItemCreate, '/api/item/create/')
 
 
 class ApiItemRead(Resource):
-    """Item Read API realization"""
+    """Item API Read realization"""
     def get(self,item_request):
         """API Item Read"""
         try:
@@ -519,13 +545,13 @@ class ApiItemRead(Resource):
                         "item_date": item_data[6],
                         "item_value": item_data[7]}
             return response_200(response)
-        except ValueError:
+        except:
             return response_400()
 api.add_resource(ApiItemRead, '/api/item/read/<string:item_request>')
 
 
 class ApiItemUpdate(Resource):
-    """Item Update API realization"""
+    """Item API Update realization"""
     def put(self,item_request):
         """API Item Update"""
         try:
@@ -561,13 +587,13 @@ class ApiItemUpdate(Resource):
                         "item_value": item_data[7]}
             cur.close()
             return response_200(response)
-        except ValueError:
+        except:
             return response_400()
 api.add_resource(ApiItemUpdate, '/api/item/update/<string:item_request>')
 
 
 class ApiItemDelete(Resource):
-    """Item Delete API realization"""
+    """Item API Delete realization"""
     def delete(self,item_request):
         """API Item Delete"""
         try:
@@ -586,14 +612,59 @@ class ApiItemDelete(Resource):
 
             mysql.connection.commit()
             return response_202()
-        except ValueError:
+        except:
             return response_400()
 api.add_resource(ApiItemDelete, '/api/item/delete/<string:item_request>')
 
 
+class ApiItemSearch(Resource):
+    """Item API Search realization"""
+    def get(self):
+        """API Item Search"""
+        try:
+            item_keys,item_values = [],[]
+            for key, value in request.args.items():
+                item_keys.append(key)
+                item_values.append(value)
 
+            cur = mysql.connection.cursor()
+            if not item_keys:
+                return response_400()
+            
+            for i in range(0,len(item_keys)):
+                cur.execute(f"SELECT * FROM items WHERE {item_keys[i]} = '{item_values[i]}';")
+                item_data = cur.fetchone()
+                if item_data:
+                    break
+                
+            if not item_data:
+                return response_404()
+            cur.close()
+            response = {"item_id": item_data[0],
+                        "item_category_id": item_data[1],
+                        "item_label": item_data[2],
+                        "item_info": item_data[3],
+                        "item_video_link": item_data[4],
+                        "item_photo_link": item_data[5],
+                        "item_date": item_data[6],
+                        "item_value": item_data[7]}
+            
+            return response_200(response)
+        except:
+            return response_400()
+api.add_resource(ApiItemSearch, '/api/item/search/')
 
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    handler = RotatingFileHandler('./department-app/debug.log', maxBytes=1000000, backupCount=1)
+    handler.setLevel(logging.DEBUG)
+    app.logger.addHandler(handler)
+    log = logging.getLogger('werkzeug')
+    log.setLevel(logging.DEBUG)
+    frmt = logging.Formatter('%(asctime)s - %(levelname)s - %(threadName)s - %(message)s')
+    handler.setFormatter(frmt)
+    log.addHandler(handler)
+    app.run(host='0.0.0.0', debug=True)
+
+    
