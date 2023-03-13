@@ -105,7 +105,7 @@ def edit_item(id_data=None):
         cur = mysql.connection.cursor()
         cur.execute("SELECT * FROM categories")
         categories_data = cur.fetchall()
-        
+
         if id_data is not None:
             cur.execute(f"SELECT * FROM items WHERE item_id = {id_data}")
             data_item = cur.fetchall()
@@ -135,7 +135,7 @@ def update_item():
         cur.execute(f"UPDATE items SET {item_update} WHERE item_id = {item_id};")
         mysql.connection.commit()
         cur.close()
-        
+
         return redirect(f"http://127.0.0.1:5000/item/{item_id}")
     except ValueError:
         return redirect("http://127.0.0.1:5000/error")
@@ -143,6 +143,7 @@ def update_item():
 
 @app.route('/error' , methods=['GET'])
 def error():
+    """Error page function"""
     try:
         return render_template('error.html')
     except ValueError:
@@ -341,7 +342,7 @@ def deliting_category(delete_id=None):
 
 
 
-
+"""Category Create API realization"""
 class ApiCategoryCreate(Resource):
     def post(self,category_label):
         """Delete page function"""
@@ -369,12 +370,13 @@ class ApiCategoryCreate(Resource):
                 return response_400()
 api.add_resource(ApiCategoryCreate, '/api/category/create/<string:category_label>')
 
-class ApiCategoryCead(Resource):
+"""Category Read API realization"""
+class ApiCategoryRead(Resource):
     def get(self,category_request):
         """Delete page function"""
         try:
             category_request = int(category_request)
-        except:
+        except TypeError:
             pass
         try:
             cur = mysql.connection.cursor()
@@ -389,14 +391,15 @@ class ApiCategoryCead(Resource):
             return response_200(response)
         except ValueError:
             return response_400()
-api.add_resource(ApiCategoryCead, '/api/category/read/<string:category_request>')
+api.add_resource(ApiCategoryRead, '/api/category/read/<string:category_request>')
 
+"""Category Update API realization"""
 class ApiCategoryUpdate(Resource):
     def put(self,category_request):
         """Delete page function"""
         try:
             category_request = int(category_request)
-        except:
+        except TypeError:
             pass
         try:
             category_label = str(request.args["category_label"])
@@ -422,12 +425,13 @@ class ApiCategoryUpdate(Resource):
             return response_400()
 api.add_resource(ApiCategoryUpdate, '/api/category/update/<string:category_request>')
 
+"""Category Delete API realization"""
 class ApiCategoryDelete(Resource):
     def delete(self,category_request):
         """Delete page function"""
         try:
             category_request = int(category_request)
-        except:
+        except TypeError:
             pass
         try:
             cur = mysql.connection.cursor()
@@ -446,7 +450,7 @@ class ApiCategoryDelete(Resource):
 api.add_resource(ApiCategoryDelete, '/api/category/delete/<string:category_request>')
 
 
-
+"""Item Create API realization"""
 class ApiItemCreate(Resource):
     def post(self):
         """Delete page function"""
@@ -481,12 +485,13 @@ class ApiItemCreate(Resource):
             return response_400()
 api.add_resource(ApiItemCreate, '/api/item/create/')
 
+"""Item Read API realization"""
 class ApiItemRead(Resource):
     def get(self,item_request):
         """Delete page function"""
         try:
             item_request = int(item_request)
-        except:
+        except TypeError:
             pass
         try:
             cur = mysql.connection.cursor()
@@ -512,12 +517,13 @@ class ApiItemRead(Resource):
             return response_400()
 api.add_resource(ApiItemRead, '/api/item/read/<string:item_request>')
 
+"""Item Update API realization"""
 class ApiItemUpdate(Resource):
     def put(self,item_request):
         """Delete page function"""
         try:
             item_request = int(item_request)
-        except:
+        except TypeError:
             pass
         try:
             item_label = request.args['item_label']
@@ -552,12 +558,13 @@ class ApiItemUpdate(Resource):
             return response_400()
 api.add_resource(ApiItemUpdate, '/api/item/update/<string:item_request>')
 
+"""Item Delete API realization"""
 class ApiItemDelete(Resource):
     def delete(self,item_request):
         """Delete page function"""
         try:
             item_request = int(item_request)
-        except:
+        except TypeError:
             pass
         try:
             cur = mysql.connection.cursor()
