@@ -6,7 +6,8 @@ from logging.handlers import RotatingFileHandler
 from flask_mysqldb import MySQL
 from flask import Flask, render_template, request, redirect, make_response
 from flask_restful import Resource, Api
-
+#pylint: disable=W0718
+#pylint: disable=C0200
 
 
 
