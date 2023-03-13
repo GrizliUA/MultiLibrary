@@ -48,7 +48,11 @@
                         <ul class="main-row">
                             <li class="main-poster">
                                 <a href="http://127.0.0.1:5000/item/{{row.0}}">
-                                    <img src="{{row.5}}" alt="poster" class="poster-img-link">
+                                    {% if row.5|length > 0%}
+                                        <img src="{{row.5}}" alt="poster" class="poster-img-link">
+                                    {% else %}
+                                        <img src="/static/images/no_image.png" alt="poster" class="poster-img-link">
+                                    {% endif %}
                                 </a>
                                 <a class="poster-text-link" href="http://127.0.0.1:5000/item/{{row.0}}">
                                     {{row.2}}

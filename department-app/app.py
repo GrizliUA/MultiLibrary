@@ -370,10 +370,10 @@ class ApiCategoryCreate(Resource):
                 return response_400()
 api.add_resource(ApiCategoryCreate, '/api/category/create/<string:category_label>')
 
-"""Category Read API realization"""
+
 class ApiCategoryRead(Resource):
+    """Category Read API realization"""
     def get(self,category_request):
-        """Delete page function"""
         try:
             category_request = int(category_request)
         except TypeError:
@@ -393,10 +393,10 @@ class ApiCategoryRead(Resource):
             return response_400()
 api.add_resource(ApiCategoryRead, '/api/category/read/<string:category_request>')
 
-"""Category Update API realization"""
+
 class ApiCategoryUpdate(Resource):
+    """Category Update API realization"""
     def put(self,category_request):
-        """Delete page function"""
         try:
             category_request = int(category_request)
         except TypeError:
@@ -425,10 +425,10 @@ class ApiCategoryUpdate(Resource):
             return response_400()
 api.add_resource(ApiCategoryUpdate, '/api/category/update/<string:category_request>')
 
-"""Category Delete API realization"""
+
 class ApiCategoryDelete(Resource):
+    """Category Delete API realization"""
     def delete(self,category_request):
-        """Delete page function"""
         try:
             category_request = int(category_request)
         except TypeError:
@@ -450,10 +450,10 @@ class ApiCategoryDelete(Resource):
 api.add_resource(ApiCategoryDelete, '/api/category/delete/<string:category_request>')
 
 
-"""Item Create API realization"""
+
 class ApiItemCreate(Resource):
+    """Item Create API realization"""
     def post(self):
-        """Delete page function"""
         try:
             item_label = request.args['item_label']
 
@@ -485,10 +485,10 @@ class ApiItemCreate(Resource):
             return response_400()
 api.add_resource(ApiItemCreate, '/api/item/create/')
 
-"""Item Read API realization"""
+
 class ApiItemRead(Resource):
+    """Item Read API realization"""
     def get(self,item_request):
-        """Delete page function"""
         try:
             item_request = int(item_request)
         except TypeError:
@@ -517,10 +517,10 @@ class ApiItemRead(Resource):
             return response_400()
 api.add_resource(ApiItemRead, '/api/item/read/<string:item_request>')
 
-"""Item Update API realization"""
+
 class ApiItemUpdate(Resource):
+    """Item Update API realization"""
     def put(self,item_request):
-        """Delete page function"""
         try:
             item_request = int(item_request)
         except TypeError:
@@ -558,10 +558,10 @@ class ApiItemUpdate(Resource):
             return response_400()
 api.add_resource(ApiItemUpdate, '/api/item/update/<string:item_request>')
 
-"""Item Delete API realization"""
+
 class ApiItemDelete(Resource):
+    """Item Delete API realization"""
     def delete(self,item_request):
-        """Delete page function"""
         try:
             item_request = int(item_request)
         except TypeError:
@@ -581,14 +581,6 @@ class ApiItemDelete(Resource):
         except ValueError:
             return response_400()
 api.add_resource(ApiItemDelete, '/api/item/delete/<string:item_request>')
-
-
-
-
-
-
-
-
 
 
 
