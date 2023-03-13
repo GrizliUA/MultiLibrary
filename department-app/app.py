@@ -2,7 +2,6 @@
 from flask_mysqldb import MySQL
 from flask import Flask, render_template, request, redirect, make_response
 from flask_restful import Resource, Api
-import datetime
 
 
 app = Flask(__name__)
