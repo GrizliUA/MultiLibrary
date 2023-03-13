@@ -69,8 +69,7 @@ def items():
         item_data = cur.fetchall()
         cur.close()
 
-        return render_template('items.html', categories=categories_data,
-                               item_data=item_data, item_category_id=item_category_id)
+        return render_template('items.html', categories=categories_data, item_data=item_data, item_category_id=item_category_id)
     except:
         return redirect("http://127.0.0.1:5000/error")
 
@@ -633,8 +632,7 @@ class ApiItemSearch(Resource):
             if not item_keys:
                 return response_400()
 
-
-            for i, index in enumerate(item_keys):
+            for i in range(0,len(item_keys)):
                 cur.execute(f"SELECT * FROM items WHERE {item_keys[i]} = '{item_values[i]}';")
                 item_data = cur.fetchone()
                 if item_data:
@@ -669,3 +667,5 @@ if __name__ == "__main__":
     handler.setFormatter(frmt)
     log.addHandler(handler)
     app.run(host='0.0.0.0', debug=True)
+
+    
