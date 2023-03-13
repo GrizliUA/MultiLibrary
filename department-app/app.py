@@ -1,11 +1,12 @@
 """Modules providing Flask realising hosting web-application at local instance"""
 from flask_mysqldb import MySQL
-from flask import Flask, render_template, request, redirect
-
-
+from flask import Flask, render_template, request, redirect, make_response
+from flask_restful import Resource, Api
+import datetime
 
 
 app = Flask(__name__)
+api = Api(app)
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
@@ -13,6 +14,27 @@ app.config['MYSQL_PASSWORD'] = '123321'
 app.config['MYSQL_DB'] = 'multilib_db'
 
 mysql = MySQL(app)
+
+def response_200(response='OK'):
+    return make_response(response,200)
+def response_201(response='Created'):
+    return make_response(response,201)
+def response_202(response='Accepted'):
+    return make_response(response,202)
+def response_208(response='Already Reported'):
+    return make_response(response,208)
+def response_400(response='Bad Request'):
+    return make_response(response,400)
+def response_403(response='Unauthorized'):
+    return make_response(response,403)
+
+def check_item_null(db_item,rq_item):
+    if rq_item == '':
+        return db_item
+    else: return rq_item
+
+
+
 
 @app.route('/')
 @app.route('/main')
@@ -125,18 +147,18 @@ def add_item_item():
 @app.route('/item/adding' , methods=['GET', 'POST'])
 def adding_item():
     """Edit page function"""
-    category_id = int(request.form["item-choice"])
-    item_info = str(request.form["item-info"])
+    item_category_id = int(request.form["item-choice"])
     item_label = str(request.form["item-label"])
-    item_photo_link = str(request.form["item-photo-link"])
+    item_info = str(request.form["item-info"])
     item_video_link = str(request.form["item-video-link"])
+    item_photo_link = str(request.form["item-photo-link"])
     cur = mysql.connection.cursor()
-    cur.execute(f"SELECT category_id FROM categories WHERE category_id = {category_id};")
+    cur.execute(f"SELECT category_id FROM categories WHERE category_id = {item_category_id};")
     categories_data = cur.fetchone()
     try:
         int(categories_data[0])
         cur.execute(f"INSERT INTO Items (item_category_id,item_label,item_info,item_video_link,"
-                    f"item_photo_link) VALUES ({category_id},'{item_label}','{item_info}',"
+                    f"item_photo_link) VALUES ({item_category_id},'{item_label}','{item_info}',"
                     f"'{item_video_link}','{item_photo_link}');")
         mysql.connection.commit()
         cur.execute(f"SELECT item_id FROM items WHERE item_label = '{item_label}';")
@@ -233,7 +255,7 @@ def delete_category():
 @app.route('/category/delete-confirm' , methods=['GET', 'POST'])
 def delete_confirm_category():
     """Delete page function"""
-    category_id = int(request.args["category-id"])
+    category_id = int(request.form["category-id"])
     return render_template('delete_confirm_category.html', delete_id=category_id)
 
 
@@ -252,6 +274,252 @@ def deliting_category(delete_id=None):
         cur.close()
         return redirect(f"http://127.0.0.1:5000/error")
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class api_category_create(Resource):
+    def post(self,category_label):
+        """Delete page function"""
+        try:
+            cur = mysql.connection.cursor()
+            cur.execute(f"INSERT INTO categories (category_label) VALUES ('{category_label}');")
+            mysql.connection.commit()
+
+            cur.execute(f"SELECT * FROM categories WHERE category_label = '{category_label}'")
+            categories_data = cur.fetchone()
+            cur.close()
+
+            response = {"category_id": categories_data[0], "category_label": categories_data[1]}
+            return response_201(response)
+        except:
+            try:
+                cur = mysql.connection.cursor()
+                cur.execute(f"SELECT * FROM categories WHERE category_label = '{category_label}'")
+                categories_data = cur.fetchone()
+                cur.close()
+
+                response = {"category_id": categories_data[0], "category_label": categories_data[1]}
+                return response_208(response)
+            except:
+                return response_400()
+api.add_resource(api_category_create, '/api/category/create/<string:category_label>')
+
+class api_category_read(Resource):
+    def get(self,category_request):
+        """Delete page function"""
+        try:
+            category_request = int(category_request)
+        except:pass
+        try:
+            cur = mysql.connection.cursor()
+            if isinstance(category_request,int):
+                cur.execute(f"SELECT * FROM categories WHERE category_id = '{category_request}'")
+            else: 
+                cur.execute(f"SELECT * FROM categories WHERE category_label = '{category_request}'")
+            categories_data = cur.fetchone()
+            cur.close()
+
+            response = {"category_id": categories_data[0], "category_label": categories_data[1]}
+            return response_200(response)
+        except:
+                return response_400()
+api.add_resource(api_category_read, '/api/category/read/<string:category_request>')
+
+class api_category_update(Resource):
+    def put(self,category_request):
+        """Delete page function"""
+        try:
+            category_request = int(category_request)
+        except:pass
+        try:
+            category_label = str(request.args["category_label"])
+            cur = mysql.connection.cursor()
+
+            if isinstance(category_request,int):
+                cur.execute(f"UPDATE categories SET category_label = '{category_label}' WHERE category_id = {category_request};")
+                mysql.connection.commit()
+                cur.execute(f"SELECT * FROM categories WHERE category_id = {category_request}")
+            else:
+                cur.execute(f"UPDATE categories SET category_label = '{category_label}' WHERE category_label = '{category_request}';")
+                mysql.connection.commit()
+                cur.execute(f"SELECT * FROM categories WHERE category_label = '{category_label}';")
+
+            categories_data = cur.fetchone()
+            cur.close()
+
+            response = {"category_id": categories_data[0], "category_label": categories_data[1]}
+            return response_202(response)
+        except:
+            return response_400()
+api.add_resource(api_category_update, '/api/category/update/<string:category_request>')
+
+class api_category_delete(Resource):
+    def delete(self,category_request):
+        """Delete page function"""
+        try:
+            category_request = int(category_request)
+        except:pass
+        try:
+            cur = mysql.connection.cursor()
+
+            if isinstance(category_request,int):
+                cur.execute(f"DELETE FROM categories WHERE category_id = {category_request};")
+                mysql.connection.commit()
+            else: 
+                cur.execute(f"DELETE FROM categories WHERE category_label = '{category_request}';")
+                mysql.connection.commit()
+            cur.close()
+
+            return response_202()
+        except:
+            return response_400()
+api.add_resource(api_category_delete, '/api/category/delete/<string:category_request>')
+
+
+
+class api_item_create(Resource):
+    def post(self):
+        """Delete page function"""
+        try:
+            item_label = request.args['item_label']
+
+            request_keys,request_values = '',''
+            for key, value in request.args.items():
+                request_keys += f'{key} , '
+                request_values += f"'{value}' , "
+            request_keys = request_keys[:-3]
+            request_values = request_values[:-3]
+
+            cur = mysql.connection.cursor()
+            cur.execute(f"INSERT INTO items ({request_keys}) VALUES ({request_values});")
+            mysql.connection.commit()
+
+            cur.execute(f"SELECT * FROM items WHERE item_label = '{item_label}'")
+            item_data = cur.fetchone()
+            cur.close()
+
+            response = {"item_id": item_data[0],
+                        "item_category_id": item_data[1],
+                        "item_label": item_data[2],
+                        "item_info": item_data[3],
+                        "item_video_link": item_data[4],
+                        "item_photo_link": item_data[5],
+                        "item_date": item_data[6],
+                        "item_value": item_data[7]}
+            return response_201(response)
+        except:
+            return response_400()
+api.add_resource(api_item_create, '/api/item/create/')
+
+class api_item_read(Resource):
+    def get(self,item_request):
+        """Delete page function"""
+        try:
+            item_request = int(item_request)
+        except:pass
+        try:
+            cur = mysql.connection.cursor()
+
+            if isinstance(item_request,int):
+                cur.execute(f"SELECT * FROM items WHERE item_id = '{item_request}'")
+            else:
+                cur.execute(f"SELECT * FROM items WHERE item_label = '{item_request}'")
+
+            item_data = cur.fetchone()
+            cur.close()
+
+            response = {"item_id": item_data[0],
+                        "item_category_id": item_data[1],
+                        "item_label": item_data[2],
+                        "item_info": item_data[3],
+                        "item_video_link": item_data[4],
+                        "item_photo_link": item_data[5],
+                        "item_date": item_data[6],
+                        "item_value": item_data[7]}
+            return response_200(response)
+        except:
+            return response_400()
+api.add_resource(api_item_read, '/api/item/read/<string:item_request>')
+
+class api_item_update(Resource):
+    def put(self,item_request):
+        """Delete page function"""
+        try:
+            item_request = int(item_request)
+        except:pass
+        try:
+            item_label = request.args['item_label']
+            item_update = ''
+            for key, value in request.args.items():
+                item_update += f"{key} = '{value}' , "
+            item_update = item_update[:-3]
+
+            cur = mysql.connection.cursor()
+
+            if isinstance(item_request,int):
+                cur.execute(f"UPDATE items SET {item_update} WHERE item_id = '{item_request}';")
+                mysql.connection.commit()
+                cur.execute(f"SELECT * FROM items WHERE item_label = '{item_label}';")
+            else:
+                cur.execute(f"UPDATE items SET {item_update} WHERE item_label = '{item_request}';")
+                mysql.connection.commit()
+                cur.execute(f"SELECT * FROM items WHERE item_label = '{item_label}';")
+
+            item_data = cur.fetchone()
+            response = {"item_id": item_data[0],
+                        "item_category_id": item_data[1],
+                        "item_label": item_data[2],
+                        "item_info": item_data[3],
+                        "item_video_link": item_data[4],
+                        "item_photo_link": item_data[5],
+                        "item_date": item_data[6],
+                        "item_value": item_data[7]}
+            cur.close()
+            return response_200(response)
+        except:
+            return response_400()
+api.add_resource(api_item_update, '/api/item/update/<string:item_request>')
+
+class api_item_delete(Resource):
+    def delete(self,item_request):
+        """Delete page function"""
+        try:
+            item_request = int(item_request)
+        except:pass
+        try:
+            cur = mysql.connection.cursor()
+
+            if isinstance(item_request,int):
+                cur.execute(f"DELETE FROM items WHERE item_id = {item_request};")
+            elif isinstance(item_request,str):
+                cur.execute(f"DELETE FROM items WHERE item_label = '{item_request}';")
+                return response_400()
+            else: return response_400()
+
+            mysql.connection.commit()
+            return response_202()
+        except:
+            return response_400()
+api.add_resource(api_item_delete, '/api/item/delete/<string:item_request>')
 
 
 
