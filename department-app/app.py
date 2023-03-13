@@ -342,10 +342,10 @@ def deliting_category(delete_id=None):
 
 
 
-"""Category Create API realization"""
+
 class ApiCategoryCreate(Resource):
+    """Category Create API realization"""
     def post(self,category_label):
-        """Delete page function"""
         try:
             cur = mysql.connection.cursor()
             cur.execute(f"INSERT INTO categories (category_label) VALUES ('{category_label}');")
