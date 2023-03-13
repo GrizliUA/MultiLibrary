@@ -14,15 +14,21 @@ app.config['MYSQL_DB'] = 'multilib_db'
 
 mysql = MySQL(app)
 
+
 def response_200(response='OK'):
+    """Returns response with code 200"""
     return make_response(response,200)
 def response_201(response='Created'):
+    """Returns response with code 201"""
     return make_response(response,201)
 def response_202(response='Accepted'):
+    """Returns response with code 202"""
     return make_response(response,202)
 def response_208(response='Already Reported'):
+    """Returns response with code 208"""
     return make_response(response,208)
 def response_400(response='Bad Request'):
+    """Returns response with code 400"""
     return make_response(response,400)
 
 
@@ -45,14 +51,12 @@ def items():
     cur.execute("SELECT * FROM categories")
     categories_data = cur.fetchall()
 
-    
     print(categories_data)
     item_category_id = request.form.get("item_category_id")
     print(item_category_id)
     cur.execute(f"SELECT * FROM items WHERE item_category_id = {item_category_id}")
     item_data = cur.fetchall()
     cur.close()
-
 
     return render_template('items.html', categories=categories_data,items=item_data)
 
@@ -67,7 +71,7 @@ def item(id_data):
     item_data = cur.fetchall()
     cur.close()
 
-    if not len(item_data):
+    if not item_data:
         return redirect(f"http://127.0.0.1:5000/error")
 
     return render_template('item.html', categories=categories_data,items=item_data)
@@ -124,12 +128,12 @@ def update_item():
     except:
         cur.close()
         return render_template('error.html')
-    
+
 
 @app.route('/error' , methods=['GET'])
 def error():
     return render_template('error.html')
-    
+
 @app.route('/item/add_item' , methods=['GET'])
 def add_item_item():
     """Edit page function"""
@@ -186,7 +190,7 @@ def deleting_item(id_data):
     except:
         cur.close()
         return render_template('error.html')
-    
+
 
 
 @app.route('/category/selection' , methods=['GET', 'POST'])
@@ -235,7 +239,8 @@ def update_category():
     category_label = str(request.form["category-label"])
     try:
         cur = mysql.connection.cursor()
-        cur.execute(f"UPDATE categories SET category_label = '{category_label}' WHERE category_id = {category_id};")
+        cur.execute(f"UPDATE categories SET category_label = '{category_label}'"
+                    f" WHERE category_id = {category_id};")
         mysql.connection.commit()
         cur.close()
         return redirect(f"http://127.0.0.1:5000/")
@@ -333,7 +338,7 @@ class api_category_read(Resource):
             cur = mysql.connection.cursor()
             if isinstance(category_request,int):
                 cur.execute(f"SELECT * FROM categories WHERE category_id = '{category_request}'")
-            else: 
+            else:
                 cur.execute(f"SELECT * FROM categories WHERE category_label = '{category_request}'")
             categories_data = cur.fetchone()
             cur.close()
@@ -355,11 +360,13 @@ class api_category_update(Resource):
             cur = mysql.connection.cursor()
 
             if isinstance(category_request,int):
-                cur.execute(f"UPDATE categories SET category_label = '{category_label}' WHERE category_id = {category_request};")
+                cur.execute(f"UPDATE categories SET category_label = '{category_label}'"
+                            f"WHERE category_id = {category_request};")
                 mysql.connection.commit()
                 cur.execute(f"SELECT * FROM categories WHERE category_id = {category_request}")
             else:
-                cur.execute(f"UPDATE categories SET category_label = '{category_label}' WHERE category_label = '{category_request}';")
+                cur.execute(f"UPDATE categories SET category_label = '{category_label}'"
+                            f"WHERE category_label = '{category_request}';")
                 mysql.connection.commit()
                 cur.execute(f"SELECT * FROM categories WHERE category_label = '{category_label}';")
 
@@ -384,7 +391,7 @@ class api_category_delete(Resource):
             if isinstance(category_request,int):
                 cur.execute(f"DELETE FROM categories WHERE category_id = {category_request};")
                 mysql.connection.commit()
-            else: 
+            else:
                 cur.execute(f"DELETE FROM categories WHERE category_label = '{category_request}';")
                 mysql.connection.commit()
             cur.close()
