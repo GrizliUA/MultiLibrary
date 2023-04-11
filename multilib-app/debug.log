@@ -1,0 +1,16 @@
+2023-04-11 15:38:11,466 - INFO - MainThread - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.103:5000
+2023-04-11 15:38:11,466 - INFO - MainThread - [33mPress CTRL+C to quit[0m
+2023-04-11 15:38:11,471 - INFO - MainThread -  * Restarting with stat
+2023-04-11 15:38:11,863 - WARNING - MainThread -  * Debugger is active!
+2023-04-11 15:38:11,867 - INFO - MainThread -  * Debugger PIN: 889-480-187
+2023-04-11 15:40:10,346 - INFO - MainThread - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.103:5000
+2023-04-11 15:40:10,346 - INFO - MainThread - [33mPress CTRL+C to quit[0m
+2023-04-11 15:40:10,349 - INFO - MainThread -  * Restarting with stat
+2023-04-11 15:40:10,701 - WARNING - MainThread -  * Debugger is active!
+2023-04-11 15:40:10,705 - INFO - MainThread -  * Debugger PIN: 889-480-187

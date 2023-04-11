@@ -660,7 +660,7 @@ api.add_resource(ApiItemSearch, '/api/item/search/')
 
 
 if __name__ == "__main__":
-    handler = RotatingFileHandler('./department-app/debug.log', maxBytes=1000000, backupCount=1)
+    handler = RotatingFileHandler('./multilib-app/debug.log', maxBytes=1000000, backupCount=1)
     handler.setLevel(logging.DEBUG)
     app.logger.addHandler(handler)
     log = logging.getLogger('werkzeug')
