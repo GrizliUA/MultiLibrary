@@ -1,0 +1,48 @@
+{% include "blocks/head.html" %}
+<body>
+    <link rel="stylesheet" href="/static/css/details_styles.css">
+    <header class="header-container">
+        {% include "blocks/nav_big.html" %}
+        {% include "blocks/header_details.html" %}
+    </header>
+    <main>
+        {% for item in items %}
+        <section class="details">   
+            <h1 class="product-label">{{item.2}}</h1>
+            <div class="main-container">
+                <div class="image-container">
+                    {% if item.5|length > 0%}
+                        <img src="{{item.5}}" alt="image">
+                    {% else %}
+                        <img src="/static/images/no_image.png" alt="image">
+                    {% endif %}
+                    <form class="form-inline" method="get" action="http://127.0.0.1:5000/item/edit/{{item.0}}">
+                        <div class="image_btn">
+                            <button type="submit" class="btn__list">Edit</button>
+                        </div>
+                    </form>
+                    <form class="form-inline" method="post" action="http://127.0.0.1:5000/item/delete/{{item.0}}">
+                        <div class="image_btn">
+                            <button type="submit" class="btn__list">Delete</button>
+                        </div>
+                    </form>
+                    <div class="add-info">
+                        <p class="info-text">📅{{item.6}}</p>
+                        <p class="info-text">⭐{{item.7}}</p>
+                    </div>
+                </div>
+                <div class="info-container">
+                    {% if item.4|length > 0%}
+                        <iframe width="640" height="360" src="{{item.4}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    {% else %}
+                        <img src="/static/images/no_video.png" alt="poster" width="640" height="360" class="alternative-video-img">
+                    {% endif %}
+                    <h5 class="info-label">Information</h5>
+                    <p class="info-text">{{item.3}}</p>
+                </div>
+            </div>
+        </section>
+        {% endfor  %}
+    </main>
+</body>
+</html>

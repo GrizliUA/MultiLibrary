@@ -14,8 +14,8 @@ install:
 script:
   - python setup.py install
   - python -m pip install mysql-connector-python
-  - python ./department-app/migrations/migrate.py
+  - python ./multilib-app/migrations/migrate.py
   - coverage run setup.py install && coverage html
-  - pylint department-app
+  - pylint multilib-app
 after_success:
   - coveralls

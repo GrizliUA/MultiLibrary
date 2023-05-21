@@ -38,13 +38,16 @@
     border-radius: 2em;
 }
 .small-form-inputs {
-    width: 4em;
-
     background-color: #24252A;
     font-size: inherit;
     border-radius: 2em;
     text-align: center;
+    padding-left: 0.4em;
 }
+.small-id-form {
+    width: 4em;
+}
+
 .small-form-div{
     display: grid;
     align-items: baseline;

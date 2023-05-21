@@ -1,0 +1,26 @@
+{% include "blocks/head.html" %}
+<body>
+    <link rel="stylesheet" href="/static/css/search_styles.css">
+    <header class="header-container">
+        {% include "blocks/nav_small.html" %}
+        {% include "blocks/header_details.html" %}
+    </header>
+        <main>
+            <div class="main-container">
+                <form class="search-form-container" method="POST" action="{{url_for('item_searching')}}">
+                    <h1 class="search__title">Enter search request</h1>
+                        <div class="search">
+                        {% set request = writed_request%}
+                        {% if request|length > 0%}
+                            <input class="search-form__input search-field" type="text" id="item_label" name="item_label" placeholder="Enter your search request here, please..." value="{{request}}">
+                        {% else %}
+                            <input class="search-form__input search-field" type="text" id="item_label" name="item_label" placeholder="Enter your search request here, please..." >
+                        {% endif %}
+                        <input class="search-form__input search-date" type="date" id="item_date" name="item_date" min="0001-01-01" max="2100-01-01" step="1" value=""/>
+                    </div>
+                        <button class="search-form_btn look-btn" type="submit">Search</button>
+                </form>
+            </div>
+        </main>
+</body>
+</html>

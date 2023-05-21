@@ -1,0 +1,24 @@
+{% include "blocks/head.html" %}
+<body>
+    <link rel="stylesheet" href="/static/css/edit.css">
+    <header class="header-container">
+        {% include "blocks/nav_small.html" %}
+        {% include "blocks/header_details.html" %}
+    </header>
+    <main>
+        <main>
+            <div class="main-container">
+                <form class="edit-form" method="POST" action="http://127.0.0.1:5000/category/adding">
+                    <div class="inner-form-container">
+                        <label for="category-label">New category name:</label>
+                        <input class="form-inputs" type="text" id="category-label" name="category-label" value="" required>
+                        <div class="form-buttons">
+                            <button type="submit" class="look-btn">Create</button>
+                            <button type="reset" class="look-btn">Reset</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+    </main>
+</body>
+</html>

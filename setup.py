@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 setup(
-    name='department-app',
+    name='multilib-app',
     version='1.0',
     author='Maksym Struk',
     long_description=__doc__,

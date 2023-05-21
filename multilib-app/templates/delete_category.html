@@ -1,0 +1,31 @@
+{% include "blocks/head.html" %}
+<body>
+    <link rel="stylesheet" href="/static/css/delete.css">
+    <header class="header-container">
+        {% include "blocks/nav_small.html" %}
+        {% include "blocks/header_details.html" %}
+    </header>
+    <main>
+        <main>
+            <div class="main-container">
+                <form class="edit-form" method="get" action="http://127.0.0.1:5000/category/delete-confirm">
+                    <div class="inner-form-container">
+                        <label>Choose category you wanna delete:</label>
+                        <div class="form-small-inputs">
+                            <div class="small-form-div">
+                                <select name="category-id" class="category-select">
+                                    {% for row in categories %}
+                                        <option value="{{row.0}}">{{row.1}}</option>
+                                    {% endfor  %}
+                                </select>
+                            </div>                              
+                        </div>
+                        <div class="form-buttons">
+                            <button type="submit" class="look-btn delete-category-btn">Delete</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+    </main>
+</body>
+</html>
