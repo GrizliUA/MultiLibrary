@@ -5,12 +5,9 @@ import logging
 from logging.handlers import RotatingFileHandler
 from flask import Flask, render_template, request, redirect, make_response
 from flask_restful import Resource, Api
-from flask_mysqldb import MySQL
-from datetime import datetime
-from sqlalchemy import func 
+from datetime import date
 from models.models import db, Categories, Items
 
-import random
 #pylint: disable=W0702
 #pylint: disable=C0200
 
@@ -26,7 +23,6 @@ app.config['MYSQL_PASSWORD'] = '123321'
 app.config['MYSQL_DB'] = 'multilib_db'
 
 db.init_app(app)
-mysql = MySQL(app)
 
 app.app_context().push()
 db.create_all()
@@ -61,14 +57,6 @@ def obj_to_list(obj) -> list:
     return new_list
 
 
-# category = Categories(category_label=random.randint(0, 10000))
-# db.session.add(category)
-# db.session.commit()
-# item = Items(item_category_id=random.randint(0, 10),
-#           item_label=random.randint(0, 10000))
-# db.session.add(item)
-# db.session.commit()
-
 def category_response(categories_data):
     return {"category_id": categories_data[0][0], "category_label": categories_data[0][1]}
 
@@ -90,7 +78,7 @@ def main():
     """Main page function"""
     try:
         categories_data = obj_to_list(Categories.query.all())
-        return render_template('main.html', title='Main', categories=categories_data)
+        return render_template('main.html', categories=categories_data)
     except:
         return redirect("http://127.0.0.1:5000/error")
 
@@ -101,7 +89,6 @@ def items():
     try:
         categories_data = obj_to_list(Categories.query.all())
         item_category_id = request.form["item_category_id"]
-        print(item_category_id)
         item_data = obj_to_list(Items.query.filter_by(item_category_id = item_category_id).all())
 
         return render_template('items.html', categories=categories_data, item_data=item_data,
@@ -140,9 +127,17 @@ def item_search():
 def item_searching():
     """Search page function"""
     try:
-        item_label = '?item_label=' + request.form["item_label"]
-        item_date = '&item_date=' + request.form["item_date"]
-        url = f"http://127.0.0.1:5000/api/item/search/{item_label+item_date}"
+        item_label = 'item_label=' + request.form["item_label"]
+        item_date = 'item_date=' + request.form["item_date"]
+
+        if len(request.form["item_label"]) > 0 and len(request.form["item_date"]) > 0:
+            url_req = '?' + item_label + '&' + item_date
+        elif len(request.form["item_label"]) > 0:
+            url_req = '?' + item_label
+        elif len(request.form["item_date"]) > 0:
+            url_req = '?' + item_date
+        
+        url = f"http://127.0.0.1:5000/api/item/search/{url_req}"
 
         with urlopen(url) as req:
             res = req.read()
@@ -179,10 +174,13 @@ def update_item():
         item_data.item_info = str(request.form["item_info"])
         item_data.item_video_link = str(request.form["item_video_link"])
         item_data.item_photo_link = str(request.form["item_photo_link"])
-        if len(str(request.form["item_date"])) == 4:
-            item_data.item_date = datetime(int(request.form["item_date"]),1,1)
+        
+        date_parts = str(request.form["item_date"]).split('-')
+        if len(date_parts) == 3:
+            year, month, day = map(int, date_parts)
+            item_data.item_date = date(year,month,day)
         else:
-            item_data.item_date = datetime(1970,1,1)
+            item_data.item_date = date(1970,1,1)
 
         if request.form["item_score"] == '':
             item_data.item_score = 0
@@ -224,23 +222,25 @@ def adding_item():
             new_item_id = obj_to_list(Items.query.filter_by(item_label = str(request.form["item_label"])).all())
             return redirect(f"http://127.0.0.1:5000/item/{new_item_id[0][0]}")
         except:
-            if len(str(request.form["item_date"])) == 4:
-                date = datetime(int(request.form["item_date"]),1,1)
+            date_parts = str(request.form["item_date"]).split('-')
+            if len(date_parts) == 3:
+                year, month, day = map(int, date_parts)
+                item_date = date(year,month,day)
             else:
-                date = datetime(1970,1,1)
+                item_date = date(1970,1,1)
 
             if request.form["item_score"] == '':
-                score = 0.0
+                item_score = 0.0
             else:
-                score = float(request.form["item_score"])
+                item_score = float(request.form["item_score"])
 
             item = Items(item_category_id=int(request.form["item_category_id"]),
                         item_label=str(request.form["item_label"]),
                         item_info=str(request.form["item_info"]),
                         item_video_link=str(request.form["item_video_link"]),
                         item_photo_link=str(request.form["item_photo_link"]),
-                        item_date=date,
-                        item_score=score)
+                        item_date=item_date,
+                        item_score=item_score)
             db.session.add(item)
             db.session.commit()
             new_item_id = obj_to_list(Items.query.filter_by(item_label = str(request.form["item_label"])).all())
@@ -536,9 +536,9 @@ class ApiItemUpdate(Resource):
                     date_parts = request.args["item_date"].split(',')
                     if len(date_parts) == 3:
                         year, month, day = map(int, date_parts)
-                        item_data.item_date = datetime(year, month, day)
+                        item_data.item_date = date(year, month, day)
                     else:
-                        item_data.item_date = datetime(1970,1,1)
+                        item_data.item_date = date(1970,1,1)
                 if 'item_score' in request.args:
                     item_data.item_score = float(request.args['item_score'])
 

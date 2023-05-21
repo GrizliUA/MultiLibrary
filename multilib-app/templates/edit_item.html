@@ -52,7 +52,7 @@
                             <div class="form-small-inputs">
                                 <div class="small-form-div">
                                     <label for="item_id">Item ID:</label>
-                                    <input class="small-form-inputs" type="text" id="item_id" name="item_id" value="{{item.0}}" readonly>
+                                    <input class="small-form-inputs small-id-form" type="text" id="item_id" name="item_id" value="{{item.0}}" readonly>
                                 </div>
                                 <div class="small-form-div">
                                     <label for="item_category_id">Category:</label>
@@ -77,9 +77,9 @@
                             <input class="form-inputs" type="url" id="item_photo_link" name="item_photo_link" value="{{item.5}}">
                             <div class="form-small-inputs-container">
                                 <label for="item_date">Year:</label>
-                                <input class="small-form-inputs" type="number" id="item_date" name="item_date" min="1895" max="2100" step="1" value="{{item.6}}"/>
+                                <input class="small-form-inputs" type="date" id="item_date" name="item_date" min="0001-01-01" max="2100-01-01" step="1" value="{{item.6}}" required/>
                                 <label for="item_score">Value:</label>
-                                <input class="small-form-inputs" type="number" id="item_score" name="item_score" min="0" max="10" step="0.1" value="{{item.7}}"/>
+                                <input class="small-form-inputs" type="number" id="item_score" name="item_score" min="0" max="10" step="0.1" value="{{item.7}}" required/>
                             </div>
                             <div class="form-buttons">
                                 <button type="submit" class="look-btn edit-category-btn">Apply</button>
