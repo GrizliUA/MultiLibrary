@@ -216,7 +216,8 @@ main {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    height: 90em;
+    height: 100%;
+    min-height: 40em;
     width: 100%;
     padding: 0px;
     background-color: #24252A;

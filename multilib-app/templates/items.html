@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MultiLib</title>
-    <link rel="stylesheet" href="/static/css/styles.css">
-</head>
+{% include "blocks/head.html" %}
 <body>
     <header class="header-container">
         <nav class="header-nav">
@@ -76,24 +68,7 @@
                         {% endif %}
                     </div>
                 </ul>
-                <section class="main-container-section">
-                    <ul class="main-row">
-                        <li class="main-poster">
-                            <a href="http://127.0.0.1:5000/item/add_item">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdi1SF2ow79ejUkxF2Z96HZSIKMIxYYKj2XQ&usqp=CAU" alt="poster" class="poster-img-link">
-                            </a>
-                            <a class="poster-text-link" href="http://127.0.0.1:5000/item/add_item">
-                                Add an item
-                            </a>
-                            <form method="post" action="http://127.0.0.1:5000/item/add_item" class="inline">
-                            <input type="hidden" name="item_category_id" value="item_category_id">
-                            <button type="submit" name="item_category_id" value="item_category_id" class="link-button">
-                                
-                            </button>
-                            </form>
-                        </li>
-                    </ul>                
-                </section>
+                {% include "blocks/add_item_container.html" %}
             </div>
     </main>
 </body>

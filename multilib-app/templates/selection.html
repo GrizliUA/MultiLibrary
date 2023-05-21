@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MultiLib</title>
-    <link rel="stylesheet" href="/static/css/styles.css">
-    <link rel="stylesheet" href="/static/css/selection.css">
-</head>
+{% include "blocks/head.html" %}
 <body>
+    <link rel="stylesheet" href="/static/css/selection.css">
     <main>
         <div class="main-container">
             <div class="error-container">
@@ -17,7 +9,7 @@
                     <form class="form-inline" method="POST" action="http://127.0.0.1:5000/category/create">
                         <button type="submit" class="look-btn">Create new</button>
                     </form>
-                    <form class="form-inline" method="get" action="http://127.0.0.1:5000/category/edit">
+                    <form   class="form-inline" method="get" action="http://127.0.0.1:5000/category/edit">
                         <button type="submit" class="look-btn">Edit existing</button>
                     </form>
                     <form class="form-inline" method="get" action="http://127.0.0.1:5000/category/delete">

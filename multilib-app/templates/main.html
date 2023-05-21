@@ -1,40 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MultiLib</title>
-    <link rel="stylesheet" href="/static/css/styles.css">
-</head>
+{% include "blocks/head.html" %}
 <body>
     <header class="header-container">
-        <nav class="header-nav">
-            <div class="header-btn-divs">
-                <form class="form-inline" method="POST" action="{{url_for('items')}}">
-                    <select name="item_category_id" class="select-menu">
-                        {% for row in categories %}
-                            <option value="{{row.0}}">{{row.1}}</option>
-                        {% endfor  %}
-                    </select>
-                    <button type="submit" class="look-btn">Go</button>
-                </form>
-            </div>
-            <div class="header-btn-divs">
-                <form class="form-inline" method="get" action="{{url_for('selection_category')}}">
-                    <button type="submit" class="look-btn">✎</button>
-                </form>               
-            </div>
-        </nav>
-        <a class="logo" href="http://127.0.0.1:5000/">MultiLib</a>
-        <form class="search-form" method="post" action="http://127.0.0.1:5000/item/search">
-            <input class="search-input" type="input-search" id="item_label" name="item_label" placeholder="Find something">
-            <button type="submit" class="search-button" >
-                <svg viewBox="0 0 1024 1024">
-                    <path class="search-svg" d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z"></path>
-                </svg>
-            </button>   
-        </form>
+        {% include "blocks/nav_small.html" %}
+        {% include "blocks/header_details.html" %}
     </header>
     <main>
         <main>
@@ -53,18 +21,7 @@
                     </ul>                
                 </section>
                 {% endfor  %}
-                <section class="main-container-section">
-                    <ul class="main-row">
-                        <li class="main-poster">
-                            <a href="http://127.0.0.1:5000/item/add_item">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdi1SF2ow79ejUkxF2Z96HZSIKMIxYYKj2XQ&usqp=CAU" alt="poster" class="poster-img-link">
-                            </a>
-                            <a class="poster-text-link" href="http://127.0.0.1:5000/item/add_item">
-                                Add an item
-                            </a>
-                        </li>
-                    </ul>                
-                </section>
+                {% include "blocks/add_item_container.html" %}
             </div>
     </main>
 </body>

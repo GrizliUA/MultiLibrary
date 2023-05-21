@@ -1,0 +1,25 @@
+{% block nav_big %}
+<nav class="header-nav">
+    <div class="header-btn-divs">
+        <form class="form-inline" method="POST" action="{{url_for('items')}}">
+            <select name="item_category_id" class="select-menu">
+                {% for item in items %}
+                    {% for row in categories %}
+                        {% if item.1 == row.0 %}
+                            <option value="{{row.0}}" selected>{{row.1}}</option>
+                        {% else %}
+                            <option value="{{row.0}}">{{row.1}}</option>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            </select>
+            <button type="submit" class="look-btn">Go</button>
+        </form>
+    </div>
+    <div class="header-btn-divs">
+        <form class="form-inline" method="get" action="{{url_for('selection_category')}}">
+            <button type="submit" class="look-btn">✎</button>
+        </form>               
+    </div>
+</nav>
+{% endblock %}
